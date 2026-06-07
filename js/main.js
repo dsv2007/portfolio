@@ -162,4 +162,53 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
         if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
     }
+
+    // 6. Typewriter Effect
+    const typewriterElement = document.getElementById('typewriter');
+    if (typewriterElement) {
+        const words = [
+            "Santhivarshini D",
+            "an AI Engineer",
+            "a Data Scientist",
+            "a Full-Stack Developer"
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                // Deleting
+                typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50; // Faster deletion
+            } else {
+                // Typing
+                typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 150; // Normal typing speed
+            }
+
+            // If word is complete
+            if (!isDeleting && charIndex === currentWord.length) {
+                // Pause at the end of the word
+                typingSpeed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                // Move to next word
+                wordIndex = (wordIndex + 1) % words.length;
+                // Pause before starting next word
+                typingSpeed = 500;
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+
+        // Start the typewriter effect
+        setTimeout(type, 1000);
+    }
 });
