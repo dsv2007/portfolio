@@ -97,6 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
             tags: ["HTML/CSS", "Vanilla JS", "Three.js", "GSAP"],
             liveLink: "#",
             githubLink: "https://github.com/dsv2007"
+        },
+        quantum: {
+            title: "Quantum AI",
+            desc: "An advanced AI Resume Analyzer & Creator Workspace featuring dynamic client-side keyword auditing, live ATS Friendliness checklists, STAR format sentence optimizers, and a real-time Neural Model Hyperparameter Hub with live convergence charts.",
+            image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+            tags: ["React", "Vite", "JavaScript", "CSS"],
+            liveLink: "#",
+            githubLink: "https://github.com/dsv2007/quantum-ai.git"
         }
     };
 
