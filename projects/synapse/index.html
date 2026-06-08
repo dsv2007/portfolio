@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse AI | Live Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060612;
+            --bg-card: #0f1021;
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: rgba(139, 92, 246, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .logo { font-family: 'Outfit', sans-serif; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Navbar */
+        .navbar {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: rgba(6, 6, 18, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
+        .logo-icon { width: 24px; height: 24px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); border-radius: 6px; }
+        .back-link { font-size: 0.9rem; color: var(--text-muted); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 6px; transition: 0.3s; }
+        .back-link:hover { color: var(--text-main); border-color: var(--accent-cyan); }
+        
+        /* Background Particles */
+        #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; }
+        
+        /* Hero */
+        .hero {
+            padding: 10rem 5% 5rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, var(--text-muted)); -webkit-background-clip: text; color: transparent; line-height: 1.2; }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2.5rem; }
+        
+        /* Dashboard Container */
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .card-header { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        
+        /* Model Selector */
+        .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .model-btn {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 1rem; border-radius: 8px;
+            color: var(--text-main); cursor: pointer; text-align: left; transition: 0.3s;
+        }
+        .model-btn:hover, .model-btn.active { background: rgba(139, 92, 246, 0.1); border-color: var(--accent-purple); }
+        .model-btn h4 { margin-bottom: 0.2rem; font-family: 'Outfit', sans-serif; }
+        .model-btn p { font-size: 0.8rem; color: var(--text-muted); }
+        
+        /* Training Visualizer */
+        .training-area { display: none; }
+        .training-area.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .progress-bar-container { width: 100%; height: 8px; background: #1a1c33; border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+        .progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan)); transition: width 0.1s; }
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .metric-box { background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; text-align: center; }
+        .metric-val { font-size: 1.8rem; font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--accent-cyan); }
+        .metric-lbl { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+        
+        /* Code Snippet */
+        .code-block {
+            background: #0d0d1a; padding: 1.5rem; border-radius: 8px; font-family: monospace;
+            color: #a5b4fc; font-size: 0.9rem; line-height: 1.5; border: 1px solid #1e1e38;
+        }
+        .keyword { color: #f472b6; }
+        .string { color: #34d399; }
+        .comment { color: #64748b; }
+        
+        /* Steps */
+        .steps { display: flex; flex-direction: column; gap: 1rem; }
+        .step { display: flex; gap: 1rem; padding: 1rem; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 3px solid transparent; }
+        .step.active { border-left-color: var(--accent-cyan); background: rgba(6, 182, 212, 0.05); }
+        .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; }
+        .step.active .step-num { background: var(--accent-cyan); color: #000; }
+        
+        .btn-primary { background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan)); color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 1.5rem; transition: opacity 0.3s; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        @media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+    
+    <nav class="navbar">
+        <div class="logo"><div class="logo-icon"></div> Synapse AI</div>
+        <a href="../../index.html" class="back-link">Back to Portfolio</a>
+    </nav>
+
+    <header class="hero">
+        <h1>Build & Deploy AI Models<br>Without Code</h1>
+        <p>Enterprise-grade machine learning platform. Upload data, select architecture, and get API endpoints in minutes.</p>
+    </header>
+
+    <section class="dashboard">
+        <div class="card">
+            <div class="card-header">Model Architect</div>
+            
+            <div class="model-grid">
+                <button class="model-btn" onclick="selectModel(this, 'Vision')">
+                    <h4>Vision Transformer</h4>
+                    <p>Image classification & detection</p>
+                </button>
+                <button class="model-btn" onclick="selectModel(this, 'NLP')">
+                    <h4>Language Model</h4>
+                    <p>Text generation & analysis</p>
+                </button>
+                <button class="model-btn" onclick="selectModel(this, 'Regression')">
+                    <h4>Random Forest</h4>
+                    <p>Tabular data prediction</p>
+                </button>
+                <button class="model-btn" onclick="selectModel(this, 'TimeSeries')">
+                    <h4>LSTM Network</h4>
+                    <p>Forecasting & sequence data</p>
+                </button>
+            </div>
+
+            <div class="training-area" id="trainingArea">
+                <div class="card-header" style="font-size: 1rem; margin-bottom: 0.5rem; display:flex; justify-content: space-between;">
+                    <span>Training Status</span>
+                    <span id="epochDisplay" style="color: var(--accent-cyan); font-weight: normal;">Epoch 0/50</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <div class="metrics-grid" style="margin-top: 1.5rem;">
+                    <div class="metric-box">
+                        <div class="metric-val" id="accMetric">0.0%</div>
+                        <div class="metric-lbl">Validation Acc</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-val" id="lossMetric" style="color: var(--accent-purple);">1.420</div>
+                        <div class="metric-lbl">Loss</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1.5rem;">
+                    <div class="card-header" style="font-size: 1rem;">API Endpoint Ready</div>
+                    <div class="code-block">
+<span class="comment"># Initialize client</span>
+<span class="keyword">import</span> synapse
+client = synapse.Client(api_key=<span class="string">"sk_test_123"</span>)
+
+<span class="comment"># Run inference</span>
+response = client.models.predict(
+    model_id=<span class="string">"mod_xyz789"</span>,
+    inputs=[data_payload]
+)
+<span class="keyword">print</span>(response.predictions)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card-header">Pipeline</div>
+                <div class="steps">
+                    <div class="step active" id="step1">
+                        <div class="step-num">1</div>
+                        <div>
+                            <h4 style="font-family: 'Outfit'; margin-bottom: 0.2rem;">Data Ingestion</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">dataset_v2.csv loaded (24MB)</p>
+                        </div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-num">2</div>
+                        <div>
+                            <h4 style="font-family: 'Outfit'; margin-bottom: 0.2rem;">Model Selection</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">Awaiting architecture selection</p>
+                        </div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-num">3</div>
+                        <div>
+                            <h4 style="font-family: 'Outfit'; margin-bottom: 0.2rem;">Training</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">Awaiting initiation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-primary" id="trainBtn" disabled onclick="startTraining()">Initialize Training Run</button>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border);">
+        Built by Santhivarshini D | <a href="../../index.html" style="color: var(--accent-cyan);">Portfolio Project</a>
+    </footer>
+
+    <script>
+        // Background Particles
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let particles = [];
+        for(let i=0; i<50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2,
+                vx: Math.random() * 0.5 - 0.25,
+                vy: Math.random() * 0.5 - 0.25
+            });
+        }
+        
+        function draw() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(139, 92, 246, 0.5)';
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        // UI Logic
+        const trainBtn = document.getElementById('trainBtn');
+        const trainingArea = document.getElementById('trainingArea');
+        const progressBar = document.getElementById('progressBar');
+        const epochDisplay = document.getElementById('epochDisplay');
+        const accMetric = document.getElementById('accMetric');
+        const lossMetric = document.getElementById('lossMetric');
+        let selectedModel = null;
+        let isTraining = false;
+
+        window.selectModel = (btn, type) => {
+            if (isTraining) return;
+            document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedModel = type;
+            trainBtn.disabled = false;
+            
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            document.getElementById('step3').classList.remove('active');
+        }
+
+        window.startTraining = () => {
+            isTraining = true;
+            trainBtn.disabled = true;
+            trainBtn.textContent = "Training in Progress...";
+            trainingArea.classList.add('active');
+            
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+            
+            let epoch = 0;
+            let acc = 45.0;
+            let loss = 2.450;
+            
+            const interval = setInterval(() => {
+                epoch++;
+                
+                // Simulate learning curve
+                acc = Math.min(94.7, acc + (Math.random() * 3 + 1));
+                loss = Math.max(0.032, loss - (Math.random() * 0.1 + 0.05));
+                
+                progressBar.style.width = `${(epoch/50)*100}%`;
+                epochDisplay.textContent = `Epoch ${epoch}/50`;
+                accMetric.textContent = `${acc.toFixed(1)}%`;
+                lossMetric.textContent = loss.toFixed(3);
+                
+                if (epoch >= 50) {
+                    clearInterval(interval);
+                    trainBtn.textContent = "Model Deployed Successfully";
+                    trainBtn.style.background = "linear-gradient(90deg, #10b981, #059669)";
+                    document.getElementById('step3').innerHTML = `
+                        <div class="step-num" style="background:#10b981;color:#fff;">✓</div>
+                        <div>
+                            <h4 style="font-family: 'Outfit'; margin-bottom: 0.2rem;">Deployed</h4>
+                            <p style="font-size: 0.8rem; color: #10b981;">API Endpoint Active</p>
+                        </div>
+                    `;
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

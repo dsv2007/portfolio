@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dsv2007.github.io/portfolio/sitemap.xml

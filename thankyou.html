@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Santhivarshini D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .thank-you-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .thank-you-card {
+            max-width: 600px;
+            padding: 4rem 2rem;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-neon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: pulseIcon 2s infinite;
+        }
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+        @keyframes pulseIcon {
+            0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 240, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
+
+    <section class="thank-you-section">
+        <div class="glass-card thank-you-card reveal-up">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h1 class="section-title">Message <span class="gradient-text">Sent!</span></h1>
+            <p class="section-desc" style="margin: 1.5rem 0 2.5rem; color: var(--text-muted); line-height: 1.6;">
+                Thank you for reaching out. Your project details have been successfully delivered to my inbox. I will review your requirements and get back to you within 24 hours.
+            </p>
+            <a href="index.html" class="btn btn-primary btn-glow">Back to Portfolio</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.reveal-up').classList.add('active');
+        });
+    </script>
+</body>
+</html>
