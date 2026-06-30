@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nova: {
             title: "Nova Finance",
             desc: "A comprehensive fintech dashboard delivering real-time analytics, portfolio tracking, and AI-driven market insights. Built with a focus on deep security and lightning-fast data processing.",
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+            image: "projects/nova/thumbnail.png",
             tags: ["React", "TypeScript", "Node.js", "D3.js"],
             liveLink: "projects/nova/index.html",
             githubLink: "https://github.com/dsv2007"
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         aura: {
             title: "Aura Boutique",
             desc: "A premium luxury e-commerce platform pushing the boundaries of web animation. Features a headless CMS, ultra-fast page transitions, and elegant product showcases.",
-            image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
+            image: "projects/aura/thumbnail.png",
             tags: ["Next.js", "Tailwind", "Stripe", "Framer Motion"],
             liveLink: "projects/aura/index.html",
             githubLink: "https://github.com/dsv2007"
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         synapse: {
             title: "Synapse AI",
             desc: "A scalable SaaS web application allowing enterprise users to rapidly train and deploy custom AI models without writing a single line of code.",
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+            image: "projects/synapse/thumbnail.png",
             tags: ["Vue.js", "Python", "TensorFlow", "AWS"],
             liveLink: "projects/synapse/index.html",
             githubLink: "https://github.com/dsv2007"
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lumina: {
             title: "Lumina Studio",
             desc: "A breath-taking corporate branding and portfolio website for an internationally recognized architecture firm. Emphasizes minimalism and structural beauty.",
-            image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+            image: "projects/lumina/thumbnail.png",
             tags: ["HTML/CSS", "Vanilla JS", "Three.js", "GSAP"],
             liveLink: "projects/lumina/index.html",
             githubLink: "https://github.com/dsv2007"
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         quantum: {
             title: "Quantum AI",
             desc: "An advanced AI Resume Analyzer & Creator Workspace featuring dynamic client-side keyword auditing, live ATS Friendliness checklists, STAR format sentence optimizers, and a real-time Neural Model Hyperparameter Hub with live convergence charts.",
-            image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+            image: "projects/quantum/thumbnail.png",
             tags: ["React", "Vite", "JavaScript", "CSS"],
             liveLink: "projects/quantum/index.html",
             githubLink: "https://github.com/dsv2007/quantum-ai"
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             desc: "A premium AI-powered engineering career path recommender, real-time skill-gap auditor, milestone roadmap tracker, and placement preparation simulator featuring AWS Aurora and Vercel serverless integration.",
             image: "projects/skillbridge/thumbnail.png",
             tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "AWS Aurora", "Vercel"],
-            liveLink: "projects/skillbridge/index.html",
+            liveLink: "https://skill-bridge-ai-ffj7.vercel.app/",
             githubLink: "https://github.com/dsv2007/Skill-Bridge-AI"
         }
     };
