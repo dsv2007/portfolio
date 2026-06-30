@@ -200,6 +200,14 @@ document.addEventListener('DOMContentLoaded', () => {
             tags: ["React", "Vite", "JavaScript", "CSS"],
             liveLink: "projects/quantum/index.html",
             githubLink: "https://github.com/dsv2007/quantum-ai"
+        },
+        skillbridge: {
+            title: "SkillBridge AI",
+            desc: "A premium AI-powered engineering career path recommender, real-time skill-gap auditor, milestone roadmap tracker, and placement preparation simulator featuring AWS Aurora and Vercel serverless integration.",
+            image: "projects/skillbridge/thumbnail.png",
+            tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "AWS Aurora", "Vercel"],
+            liveLink: "projects/skillbridge/index.html",
+            githubLink: "https://github.com/dsv2007/Skill-Bridge-AI"
         }
     };
 

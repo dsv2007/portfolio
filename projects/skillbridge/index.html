@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge AI | Redirecting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #03040b;
+            --accent-purple: #8b5cf6;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        #bridge-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.25; }
+        
+        .content {
+            background: rgba(3, 4, 11, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+            animation: popIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        h1 { font-family: 'Outfit', sans-serif; font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-purple); text-shadow: 0 0 15px rgba(139, 92, 246, 0.3); }
+        p { color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; font-size: 1.1rem; }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(139, 92, 246, 0.2);
+            border-top-color: var(--accent-purple);
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .btn {
+            display: inline-block;
+            background: var(--text-main);
+            color: var(--bg-base);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn:hover { background: var(--accent-purple); color: var(--text-main); box-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
+        .back-link { display: block; margin-top: 1.5rem; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: var(--text-main); }
+    </style>
+</head>
+<body>
+    <canvas id="bridge-canvas"></canvas>
+    
+    <div class="content">
+        <div class="loader"></div>
+        <h1>SkillBridge AI</h1>
+        <p>You are being redirected to the official SkillBridge AI deployment.<br>This is an AI-powered placement mentor, career path recommender, and skill-gap analyzer project.</p>
+        <a href="https://skill-bridge-ai-ffj7.vercel.app/" class="btn">Go to Live Project Now</a>
+        <a href="../../index.html" class="back-link">Cancel & Return to Portfolio</a>
+    </div>
+
+    <script>
+        // Particle Bridge Network
+        const canvas = document.getElementById('bridge-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        const particles = [];
+        const numParticles = 45;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1.2;
+                this.vy = (Math.random() - 0.5) * 1.2;
+                this.radius = Math.random() * 2 + 1.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.6)';
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(3, 4, 11, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.4 * (1 - dist / 130)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Auto redirect after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'https://skill-bridge-ai-ffj7.vercel.app/';
+        }, 3000);
+    </script>
+</body>
+</html>
