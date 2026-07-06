@@ -3,1480 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nova Finance — A premium fintech dashboard and analytics platform for portfolio management, trading, and real-time market insights.">
-    <title>Nova Finance | Dashboard & Analytics</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>NovaMind Cloud - AI Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --bg-primary: #0a0e27;
-            --bg-secondary: #0f1433;
-            --bg-card: rgba(15, 20, 55, 0.65);
-            --bg-card-hover: rgba(20, 28, 75, 0.75);
-            --border-glass: rgba(0, 210, 255, 0.12);
-            --border-glass-hover: rgba(0, 210, 255, 0.3);
-            --accent-cyan: #00d2ff;
-            --accent-blue: #3a7bd5;
-            --accent-purple: #7b2ff7;
-            --accent-neon: #00f0ff;
-            --text-primary: #e8ecf4;
-            --text-secondary: #8892b0;
-            --text-muted: #5a6380;
-            --green: #00e676;
-            --green-dim: rgba(0, 230, 118, 0.15);
-            --red: #ff5252;
-            --red-dim: rgba(255, 82, 82, 0.15);
-            --yellow: #ffd740;
-            --shadow-glow: 0 0 30px rgba(0, 210, 255, 0.08);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.35);
-            --radius: 16px;
-            --radius-sm: 10px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-dark: #04050f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --purple: #7c3aed;
+            --cyan: #06b6d4;
+            --pink: #db2777;
+            --text-main: #f8f9fa;
+            --text-muted: #a0aec0;
+            --font-inter: 'Inter', sans-serif;
+            --font-outfit: 'Outfit', sans-serif;
         }
-
-        html { scroll-behavior: smooth; }
-
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-inter);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
             min-height: 100vh;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* ===== AMBIENT BACKGROUND ===== */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(0, 210, 255, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(123, 47, 247, 0.05) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(58, 123, 213, 0.03) 0%, transparent 60%);
-            animation: ambientShift 20s ease-in-out infinite alternate;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        @keyframes ambientShift {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-3%, 2%) rotate(1deg); }
-            100% { transform: translate(2%, -3%) rotate(-1deg); }
-        }
-
-        /* ===== GRID OVERLAY ===== */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0, 210, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 210, 255, 0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-primary); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
-
-        /* ===== GLASSMORPHISM UTILITY ===== */
-        .glass {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-card);
-            transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
-        }
-
-        .glass:hover {
-            border-color: var(--border-glass-hover);
-            box-shadow: var(--shadow-card), var(--shadow-glow);
-            transform: translateY(-2px);
-        }
-
-        /* ===== HEADER ===== */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 14, 39, 0.85);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border-glass);
-            padding: 0 2rem;
-            animation: headerSlide 0.8s ease-out;
-        }
-
-        @keyframes headerSlide {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .header-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .brand-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 800;
-            color: #fff;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
-            animation: iconPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
-            50% { box-shadow: 0 0 35px rgba(0, 210, 255, 0.5); }
-        }
-
-        .brand-text {
             display: flex;
             flex-direction: column;
         }
 
-        .brand-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
+        .navbar {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
         }
 
-        .brand-sub {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 500;
-        }
-
-        .header-nav {
+        .back-btn {
+            color: var(--text-main);
+            text-decoration: none;
             display: flex;
             align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        .logo {
+            font-family: var(--font-outfit);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .nav-links a.active { color: var(--cyan); }
+
+        .dashboard {
+            flex: 1;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .main-content { display: flex; flex-direction: column; gap: 2rem; }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
         }
 
-        .header-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: color var(--transition);
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .metric-title { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .metric-value { font-family: var(--font-outfit); font-size: 2rem; font-weight: 700; color: var(--text-main); }
+        .metric-accent { color: var(--cyan); }
+
+        .chart-container {
+            height: 350px;
             position: relative;
         }
 
-        .header-link:hover {
-            color: var(--accent-cyan);
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
         }
 
-        .header-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-cyan);
-            transition: width var(--transition);
-        }
-
-        .header-link:hover::after { width: 100%; }
-
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 1rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; border-bottom: 1px solid var(--card-border); }
+        td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--green);
-            background: var(--green-dim);
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 230, 118, 0.2);
         }
+        .badge.success { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .badge.warning { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .badge.info { background: rgba(6, 182, 212, 0.2); color: #06b6d4; }
 
-        .live-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: livePulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.4); }
-            50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(0, 230, 118, 0); }
-        }
-
-        .back-link {
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .insight-item {
             display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-glass);
-            transition: all var(--transition);
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--card-border);
         }
-
-        .back-link:hover {
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-            background: rgba(0, 210, 255, 0.05);
+        .insight-icon {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; flex-shrink: 0;
         }
+        .insight-icon.up { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .insight-icon.warn { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .insight-icon.check { background: rgba(6, 182, 212, 0.2); color: #06b6d4; }
+        
+        .insight-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.4; }
+        .insight-text strong { color: var(--text-main); }
 
-        /* ===== MAIN LAYOUT ===== */
-        .main-wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 1440px;
-            margin: 0 auto;
+        .tech-stack {
             padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--card-border);
+        }
+        .tech-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-main);
         }
 
-        .content-area { min-width: 0; }
-
-        /* ===== HERO STATS ===== */
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.25rem;
-            margin-bottom: 2rem;
-            animation: fadeUp 0.6s ease-out 0.2s both;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeIn {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .stat-card {
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            border-radius: var(--radius) var(--radius) 0 0;
-        }
-
-        .stat-card:nth-child(1)::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); }
-        .stat-card:nth-child(2)::before { background: linear-gradient(90deg, var(--green), #00c853); }
-        .stat-card:nth-child(3)::before { background: linear-gradient(90deg, var(--accent-purple), #9c4dff); }
-        .stat-card:nth-child(4)::before { background: linear-gradient(90deg, var(--yellow), #ffab00); }
-
-        .stat-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.35rem;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stat-change {
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            border-radius: 6px;
-        }
-
-        .stat-change.positive {
-            color: var(--green);
-            background: var(--green-dim);
-        }
-
-        .stat-change.negative {
-            color: var(--red);
-            background: var(--red-dim);
-        }
-
-        .stat-icon {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            background: rgba(0, 210, 255, 0.08);
-            color: var(--accent-cyan);
-        }
-
-        /* ===== CHART SECTION ===== */
-        .chart-section {
-            margin-bottom: 2rem;
-            animation: fadeUp 0.6s ease-out 0.4s both;
-        }
-
-        .chart-card {
-            padding: 1.75rem;
-        }
-
-        .chart-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-
-        .chart-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .chart-title-sub {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .chart-controls {
-            display: flex;
-            gap: 4px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 3px;
-        }
-
-        .chart-btn {
-            border: none;
-            background: transparent;
-            color: var(--text-muted);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all var(--transition);
-        }
-
-        .chart-btn.active {
-            background: var(--accent-cyan);
-            color: var(--bg-primary);
-            font-weight: 600;
-        }
-
-        .chart-btn:hover:not(.active) {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .chart-canvas-wrap {
-            position: relative;
-            width: 100%;
-            height: 320px;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-        }
-
-        #priceChart {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* ===== HOLDINGS TABLE ===== */
-        .holdings-section {
-            animation: fadeUp 0.6s ease-out 0.6s both;
-        }
-
-        .holdings-card {
-            padding: 1.75rem;
-        }
-
-        .holdings-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.25rem;
-        }
-
-        .holdings-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .holdings-count {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background: rgba(0, 0, 0, 0.25);
-            padding: 4px 12px;
-            border-radius: 6px;
-        }
-
-        .holdings-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .holdings-table th {
-            text-align: left;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 0 0.75rem 0.75rem;
-            border-bottom: 1px solid var(--border-glass);
-        }
-
-        .holdings-table th:last-child,
-        .holdings-table td:last-child { text-align: right; }
-
-        .holdings-table td {
-            padding: 1rem 0.75rem;
-            font-size: 0.88rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            vertical-align: middle;
-        }
-
-        .holdings-table tr {
-            transition: background var(--transition);
-        }
-
-        .holdings-table tbody tr:hover {
-            background: rgba(0, 210, 255, 0.03);
-        }
-
-        .stock-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .stock-icon-wrap {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.7rem;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .stock-icon-wrap.aapl { background: linear-gradient(135deg, #555, #333); }
-        .stock-icon-wrap.googl { background: linear-gradient(135deg, #4285f4, #34a853); }
-        .stock-icon-wrap.tsla { background: linear-gradient(135deg, #cc0000, #8b0000); }
-        .stock-icon-wrap.msft { background: linear-gradient(135deg, #00a4ef, #7fba00); }
-        .stock-icon-wrap.nvda { background: linear-gradient(135deg, #76b900, #4a7a00); }
-        .stock-icon-wrap.amzn { background: linear-gradient(135deg, #ff9900, #cc7a00); }
-
-        .stock-name {
-            font-weight: 600;
-            font-size: 0.88rem;
-        }
-
-        .stock-fullname {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-        }
-
-        .shares-val {
-            font-weight: 500;
-        }
-
-        .price-val {
-            font-weight: 600;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .change-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
-
-        .change-badge.up {
-            color: var(--green);
-            background: var(--green-dim);
-        }
-
-        .change-badge.down {
-            color: var(--red);
-            background: var(--red-dim);
-        }
-
-        /* Sparkline */
-        .sparkline {
-            display: flex;
-            align-items: flex-end;
-            gap: 2px;
-            height: 28px;
-        }
-
-        .sparkline .bar {
-            width: 4px;
-            border-radius: 2px;
-            animation: sparkGrow 0.8s ease-out forwards;
-            transform-origin: bottom;
-            transform: scaleY(0);
-        }
-
-        @keyframes sparkGrow {
-            to { transform: scaleY(1); }
-        }
-
-        .sparkline .bar.up { background: var(--green); }
-        .sparkline .bar.down { background: var(--red); }
-
-        /* ===== SIDEBAR ===== */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            animation: fadeUp 0.6s ease-out 0.5s both;
-        }
-
-        .sidebar-card {
-            padding: 1.5rem;
-        }
-
-        .sidebar-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sidebar-title .icon {
-            font-size: 1rem;
-        }
-
-        /* Quick Actions */
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .action-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            padding: 1rem 0.5rem;
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-sm);
-            background: rgba(0, 0, 0, 0.15);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all var(--transition);
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .action-btn:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            background: rgba(0, 210, 255, 0.05);
-            transform: translateY(-2px);
-        }
-
-        .action-btn .action-icon {
-            font-size: 1.4rem;
-        }
-
-        .action-btn .action-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        /* Market Pulse */
-        .market-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.65rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .market-item:last-child { border-bottom: none; }
-
-        .market-label {
-            font-size: 0.82rem;
-            font-weight: 500;
-        }
-
-        .market-val {
-            font-size: 0.82rem;
-            font-weight: 600;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .market-val.green { color: var(--green); }
-        .market-val.red { color: var(--red); }
-
-        /* Allocation Ring */
-        .allocation-wrap {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-
-        .allocation-ring {
-            width: 140px;
-            height: 140px;
-            position: relative;
-        }
-
-        .allocation-ring svg {
-            width: 100%;
-            height: 100%;
-            transform: rotate(-90deg);
-        }
-
-        .allocation-ring circle {
-            fill: none;
-            stroke-width: 14;
-            stroke-linecap: round;
-        }
-
-        .ring-center {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ring-center .val {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .ring-center .label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-        }
-
-        .alloc-legend {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-        }
-
-        .legend-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .legend-pct {
-            margin-left: auto;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* ===== TICKER BAR ===== */
-        .ticker-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(10, 14, 39, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-top: 1px solid var(--border-glass);
-            height: 42px;
-            overflow: hidden;
-        }
-
-        .ticker-track {
-            display: flex;
-            align-items: center;
-            height: 100%;
-            animation: tickerScroll 35s linear infinite;
-            white-space: nowrap;
-            width: max-content;
-        }
-
-        @keyframes tickerScroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 2rem;
-            font-size: 0.78rem;
-            font-weight: 500;
-        }
-
-        .ticker-symbol {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .ticker-price {
-            color: var(--text-secondary);
-            font-variant-numeric: tabular-nums;
-        }
-
-        .ticker-chg {
-            font-weight: 600;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .ticker-chg.up { color: var(--green); }
-        .ticker-chg.down { color: var(--red); }
-
-        .ticker-sep {
-            color: var(--text-muted);
-            opacity: 0.3;
-            padding: 0 0.25rem;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 3rem 2rem 4.5rem;
-            color: var(--text-muted);
-            font-size: 0.82rem;
-        }
-
-        .footer a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-
-        .footer a:hover {
-            color: #fff;
-        }
-
-        .footer-divider {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
-            margin: 0 auto 1rem;
-            border-radius: 1px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1100px) {
-            .main-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .header-inner {
-                height: 60px;
-            }
-
-            .header-nav .header-link {
-                display: none;
-            }
-
-            .main-wrapper {
-                padding: 1rem;
-                gap: 1rem;
-            }
-
-            .stat-value {
-                font-size: 1.35rem;
-            }
-
-            .stat-icon { display: none; }
-
-            .chart-canvas-wrap { height: 240px; }
-
-            .holdings-table th:nth-child(4),
-            .holdings-table td:nth-child(4) {
-                display: none;
-            }
-
-            .sidebar {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .brand-name { font-size: 1rem; }
-
-            .holdings-table th:nth-child(3),
-            .holdings-table td:nth-child(3) {
-                display: none;
-            }
-        }
-
-        /* ===== ANIMATIONS ===== */
-        .fade-in-row > * {
-            animation: fadeUp 0.5s ease-out both;
-        }
-
-        .fade-in-row > *:nth-child(1) { animation-delay: 0.1s; }
-        .fade-in-row > *:nth-child(2) { animation-delay: 0.2s; }
-        .fade-in-row > *:nth-child(3) { animation-delay: 0.3s; }
-        .fade-in-row > *:nth-child(4) { animation-delay: 0.4s; }
-        .fade-in-row > *:nth-child(5) { animation-delay: 0.5s; }
-        .fade-in-row > *:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
-
-    <!-- ===== HEADER ===== -->
-    <header class="header" id="header">
-        <div class="header-inner">
-            <a href="#" class="brand">
-                <div class="brand-icon">N</div>
-                <div class="brand-text">
-                    <span class="brand-name">Nova Finance</span>
-                    <span class="brand-sub">Dashboard & Analytics</span>
-                </div>
-            </a>
-
-            <nav class="header-nav">
-                <a href="#" class="header-link">Dashboard</a>
-                <a href="#" class="header-link">Markets</a>
-                <a href="#" class="header-link">Analytics</a>
-                <span class="live-badge">
-                    <span class="live-dot"></span>
-                    LIVE
-                </span>
-                <a href="../../index.html" class="back-link">← Back to Portfolio</a>
-            </nav>
+    <nav class="navbar">
+        <a href="../../index.html" class="back-btn">← Back to Portfolio</a>
+        <div class="logo">NovaMind Cloud</div>
+        <div class="nav-links">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Analytics</a>
+            <a href="#">Reports</a>
         </div>
-    </header>
+    </nav>
 
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="main-wrapper">
-        <div class="content-area">
-
-            <!-- HERO STATS -->
-            <div class="hero-stats fade-in-row" id="heroStats">
-                <div class="stat-card glass">
-                    <div class="stat-label">Total Portfolio</div>
-                    <div class="stat-value" id="statPortfolio">$0</div>
-                    <span class="stat-change positive">▲ +12.4%</span>
-                    <div class="stat-icon">💰</div>
+    <div class="dashboard">
+        <div class="main-content">
+            <div class="metrics">
+                <div class="card" style="animation-delay: 0.1s">
+                    <div class="metric-title">Total Records Analyzed</div>
+                    <div class="metric-value count-up" data-target="12847">0</div>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-label">Daily P&L</div>
-                    <div class="stat-value" id="statPL" style="color: var(--green);">$0</div>
-                    <span class="stat-change positive">▲ +1.2%</span>
-                    <div class="stat-icon">📈</div>
+                <div class="card" style="animation-delay: 0.2s">
+                    <div class="metric-title">Model Accuracy</div>
+                    <div class="metric-value"><span class="count-up" data-target="94.3" data-decimal="true">0</span><span class="metric-accent">%</span></div>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-label">Active Positions</div>
-                    <div class="stat-value" id="statPositions" style="color: var(--accent-cyan);">0</div>
-                    <span class="stat-change positive">▲ +3 today</span>
-                    <div class="stat-icon">📊</div>
+                <div class="card" style="animation-delay: 0.3s">
+                    <div class="metric-title">Insights Generated</div>
+                    <div class="metric-value count-up" data-target="328">0</div>
                 </div>
-                <div class="stat-card glass">
-                    <div class="stat-label">Win Rate</div>
-                    <div class="stat-value" id="statWinRate" style="color: var(--yellow);">0%</div>
-                    <span class="stat-change positive">▲ +2.1%</span>
-                    <div class="stat-icon">🏆</div>
+                <div class="card" style="animation-delay: 0.4s">
+                    <div class="metric-title">Avg Processing Time</div>
+                    <div class="metric-value"><span class="count-up" data-target="1.2" data-decimal="true">0</span><span class="metric-accent">s</span></div>
                 </div>
             </div>
 
-            <!-- CHART -->
-            <div class="chart-section">
-                <div class="chart-card glass">
-                    <div class="chart-header">
-                        <div>
-                            <div class="chart-title">Portfolio Performance</div>
-                            <div class="chart-title-sub">30-day growth · Updated just now</div>
-                        </div>
-                        <div class="chart-controls">
-                            <button class="chart-btn" data-range="7">1W</button>
-                            <button class="chart-btn active" data-range="30">1M</button>
-                            <button class="chart-btn" data-range="90">3M</button>
-                            <button class="chart-btn" data-range="365">1Y</button>
-                        </div>
-                    </div>
-                    <div class="chart-canvas-wrap">
-                        <canvas id="priceChart"></canvas>
-                    </div>
-                </div>
+            <div class="card chart-container" style="animation-delay: 0.5s">
+                <canvas id="accuracyChart"></canvas>
             </div>
 
-            <!-- HOLDINGS TABLE -->
-            <div class="holdings-section">
-                <div class="holdings-card glass">
-                    <div class="holdings-header">
-                        <h2 class="holdings-title">Holdings</h2>
-                        <span class="holdings-count">6 Assets</span>
-                    </div>
-                    <table class="holdings-table">
-                        <thead>
-                            <tr>
-                                <th>Asset</th>
-                                <th>Shares</th>
-                                <th>Price</th>
-                                <th>Trend</th>
-                                <th>Change</th>
-                            </tr>
-                        </thead>
-                        <tbody id="holdingsBody" class="fade-in-row">
-                        </tbody>
-                    </table>
-                </div>
+            <div class="card table-container" style="animation-delay: 0.6s">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Records</th>
+                            <th>Status</th>
+                            <th>Accuracy</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Customer_Churn_Q3</td>
+                            <td>4,521</td>
+                            <td><span class="badge success">Processed</span></td>
+                            <td>94.8%</td>
+                            <td><a href="#" style="color:var(--cyan)">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Sales_Forecast_2026</td>
+                            <td>12,050</td>
+                            <td><span class="badge info">Analyzing</span></td>
+                            <td>--</td>
+                            <td><a href="#" style="color:var(--cyan)">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>Inventory_Levels_Reg</td>
+                            <td>890</td>
+                            <td><span class="badge warning">Pending</span></td>
+                            <td>--</td>
+                            <td><a href="#" style="color:var(--cyan)">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <!-- Quick Actions -->
-            <div class="sidebar-card glass">
-                <div class="sidebar-title"><span class="icon">⚡</span> Quick Actions</div>
-                <div class="action-grid">
-                    <button class="action-btn" id="btnTrade">
-                        <span class="action-icon">📉</span>
-                        <span class="action-label">Trade</span>
-                    </button>
-                    <button class="action-btn" id="btnDeposit">
-                        <span class="action-icon">💳</span>
-                        <span class="action-label">Deposit</span>
-                    </button>
-                    <button class="action-btn" id="btnReports">
-                        <span class="action-icon">📋</span>
-                        <span class="action-label">Reports</span>
-                    </button>
-                    <button class="action-btn" id="btnSettings">
-                        <span class="action-icon">⚙️</span>
-                        <span class="action-label">Settings</span>
-                    </button>
+        <div class="sidebar">
+            <div class="card" style="animation-delay: 0.7s">
+                <h3 style="margin-bottom: 1.5rem; font-family: var(--font-outfit);">AI Insights</h3>
+                <div class="insight-item">
+                    <div class="insight-icon up">▲</div>
+                    <div class="insight-text"><strong>Sales trend up 23%</strong> detected in Q2 projections based on recent marketing spend.</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon warn">!</div>
+                    <div class="insight-text"><strong>Anomaly detected</strong> in Dataset B: unusually high churn rate in Segment 4.</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon check">✓</div>
+                    <div class="insight-text"><strong>Model threshold exceeded:</strong> Accuracy reached 95% on the latest training epoch.</div>
                 </div>
             </div>
-
-            <!-- Market Pulse -->
-            <div class="sidebar-card glass">
-                <div class="sidebar-title"><span class="icon">🌐</span> Market Pulse</div>
-                <div class="market-item">
-                    <span class="market-label">S&P 500</span>
-                    <span class="market-val green">+0.84%</span>
-                </div>
-                <div class="market-item">
-                    <span class="market-label">NASDAQ</span>
-                    <span class="market-val green">+1.23%</span>
-                </div>
-                <div class="market-item">
-                    <span class="market-label">DOW</span>
-                    <span class="market-val red">−0.17%</span>
-                </div>
-                <div class="market-item">
-                    <span class="market-label">BTC/USD</span>
-                    <span class="market-val green">+2.45%</span>
-                </div>
-                <div class="market-item">
-                    <span class="market-label">ETH/USD</span>
-                    <span class="market-val green">+3.12%</span>
-                </div>
-                <div class="market-item">
-                    <span class="market-label">Gold</span>
-                    <span class="market-val red">−0.32%</span>
-                </div>
-            </div>
-
-            <!-- Allocation -->
-            <div class="sidebar-card glass">
-                <div class="sidebar-title"><span class="icon">🎯</span> Allocation</div>
-                <div class="allocation-wrap">
-                    <div class="allocation-ring">
-                        <svg viewBox="0 0 120 120">
-                            <circle cx="60" cy="60" r="50" stroke="rgba(255,255,255,0.04)" />
-                            <!-- Tech 42% -->
-                            <circle cx="60" cy="60" r="50" stroke="var(--accent-cyan)" stroke-dasharray="131.95 314.16" stroke-dashoffset="0" style="animation: ringDraw 1.5s ease-out 0.8s both;" />
-                            <!-- Auto 18% -->
-                            <circle cx="60" cy="60" r="50" stroke="var(--red)" stroke-dasharray="56.55 314.16" stroke-dashoffset="-131.95" style="animation: ringDraw 1.5s ease-out 1s both;" />
-                            <!-- Cloud 22% -->
-                            <circle cx="60" cy="60" r="50" stroke="var(--accent-purple)" stroke-dasharray="69.12 314.16" stroke-dashoffset="-188.5" style="animation: ringDraw 1.5s ease-out 1.2s both;" />
-                            <!-- Finance 18% -->
-                            <circle cx="60" cy="60" r="50" stroke="var(--yellow)" stroke-dasharray="56.55 314.16" stroke-dashoffset="-257.61" style="animation: ringDraw 1.5s ease-out 1.4s both;" />
-                        </svg>
-                        <div class="ring-center">
-                            <span class="val">$284K</span>
-                            <span class="label">Total</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="alloc-legend">
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: var(--accent-cyan);"></span>
-                        Technology
-                        <span class="legend-pct">42%</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: var(--accent-purple);"></span>
-                        Cloud & AI
-                        <span class="legend-pct">22%</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: var(--red);"></span>
-                        Automotive
-                        <span class="legend-pct">18%</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: var(--yellow);"></span>
-                        E-Commerce
-                        <span class="legend-pct">18%</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
+        </div>
     </div>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="footer-divider"></div>
-        <p>Built by <strong>Santhivarshini D</strong> | Portfolio Project</p>
-        <p style="margin-top: 0.5rem;">
-            <a href="../../index.html">← Back to Main Portfolio</a>
-        </p>
-    </footer>
-
-    <!-- ===== TICKER BAR ===== -->
-    <div class="ticker-bar" id="tickerBar">
-        <div class="ticker-track" id="tickerTrack"></div>
+    <div class="tech-stack">
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">Pandas</span>
+        <span class="tech-badge">NumPy</span>
+        <span class="tech-badge">Power BI Style</span>
+        <span class="tech-badge">AI/ML</span>
     </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
     <script>
-    (function() {
-        'use strict';
-
-        /* ===== COUNT-UP ANIMATION ===== */
-        function animateValue(el, start, end, duration, prefix, suffix, decimals) {
-            prefix = prefix || '';
-            suffix = suffix || '';
-            decimals = decimals || 0;
-            const startTime = performance.now();
-
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                // Ease out cubic
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = start + (end - start) * eased;
-
-                if (decimals > 0) {
-                    el.textContent = prefix + current.toLocaleString('en-US', {
-                        minimumFractionDigits: decimals,
-                        maximumFractionDigits: decimals
-                    }) + suffix;
+        // Count Up Animation
+        document.querySelectorAll('.count-up').forEach(el => {
+            const target = parseFloat(el.getAttribute('data-target'));
+            const isDecimal = el.getAttribute('data-decimal') === 'true';
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.innerText = isDecimal ? target.toFixed(1) : Math.floor(target).toLocaleString();
+                    clearInterval(timer);
                 } else {
-                    el.textContent = prefix + Math.round(current).toLocaleString('en-US') + suffix;
+                    el.innerText = isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString();
                 }
+            }, 30);
+        });
 
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
-            }
-            requestAnimationFrame(update);
+        // Canvas Chart
+        const canvas = document.getElementById('accuracyChart');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth - 48; // padding
+            canvas.height = 300;
+            drawChart();
         }
+        
+        window.addEventListener('resize', resizeCanvas);
 
-        // Trigger stat animations
-        setTimeout(function() {
-            animateValue(document.getElementById('statPortfolio'), 0, 284532.18, 2200, '$', '', 2);
-            animateValue(document.getElementById('statPL'), 0, 3421, 1800, '+$', '', 0);
-            animateValue(document.getElementById('statPositions'), 0, 24, 1500, '', '', 0);
-            animateValue(document.getElementById('statWinRate'), 0, 73.2, 2000, '', '%', 1);
-        }, 400);
+        function drawChart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const data = [65, 72, 80, 85, 90, 94.3];
+            const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            
+            const maxVal = 100;
+            const w = canvas.width;
+            const h = canvas.height;
+            const padding = 40;
+            
+            const stepX = (w - padding*2) / (data.length - 1);
+            
+            // Draw gradient fill
+            const gradient = ctx.createLinearGradient(0, 0, 0, h);
+            gradient.addColorStop(0, 'rgba(124, 58, 237, 0.4)');
+            gradient.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
+            
+            ctx.beginPath();
+            ctx.moveTo(padding, h - padding);
+            data.forEach((val, i) => {
+                const x = padding + i * stepX;
+                const y = (h - padding) - (val / maxVal) * (h - padding*2);
+                ctx.lineTo(x, y);
+            });
+            ctx.lineTo(w - padding, h - padding);
+            ctx.fillStyle = gradient;
+            ctx.fill();
 
-        /* ===== CHART ===== */
-        function generateData(points) {
-            const data = [];
-            let price = 245000;
-            for (let i = 0; i < points; i++) {
-                price += (Math.random() - 0.42) * 4500;
-                price = Math.max(price, 200000);
-                data.push(price);
-            }
-            // Ensure the last value ends around 284532
-            const target = 284532;
-            const lastN = Math.min(5, data.length);
-            for (let i = data.length - lastN; i < data.length; i++) {
-                const t = (i - (data.length - lastN)) / (lastN - 1);
-                data[i] = data[i] * (1 - t) + target * t;
-            }
-            return data;
-        }
+            // Draw line
+            ctx.beginPath();
+            ctx.strokeStyle = '#06b6d4';
+            ctx.lineWidth = 3;
+            data.forEach((val, i) => {
+                const x = padding + i * stepX;
+                const y = (h - padding) - (val / maxVal) * (h - padding*2);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
 
-        function drawChart(canvas, data, animDuration) {
-            const ctx = canvas.getContext('2d');
-            const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-
-            const w = rect.width;
-            const h = rect.height;
-            const padTop = 20;
-            const padBottom = 35;
-            const padLeft = 55;
-            const padRight = 20;
-            const chartW = w - padLeft - padRight;
-            const chartH = h - padTop - padBottom;
-
-            const minVal = Math.min(...data) * 0.995;
-            const maxVal = Math.max(...data) * 1.005;
-            const range = maxVal - minVal;
-
-            function xPos(i) { return padLeft + (i / (data.length - 1)) * chartW; }
-            function yPos(v) { return padTop + (1 - (v - minVal) / range) * chartH; }
-
-            // Animate
-            const startTime = performance.now();
-
-            function render(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(elapsed / animDuration, 1);
-                const eased = 1 - Math.pow(1 - progress, 2);
-                const drawCount = Math.floor(eased * data.length);
-
-                ctx.clearRect(0, 0, w, h);
-
-                // Grid lines
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
-                ctx.lineWidth = 1;
-                const gridLines = 5;
-                for (let i = 0; i <= gridLines; i++) {
-                    const y = padTop + (i / gridLines) * chartH;
-                    ctx.beginPath();
-                    ctx.moveTo(padLeft, y);
-                    ctx.lineTo(w - padRight, y);
-                    ctx.stroke();
-
-                    // Labels
-                    const val = maxVal - (i / gridLines) * range;
-                    ctx.fillStyle = 'rgba(255,255,255,0.25)';
-                    ctx.font = '10px Inter, sans-serif';
-                    ctx.textAlign = 'right';
-                    ctx.fillText('$' + Math.round(val / 1000) + 'K', padLeft - 8, y + 4);
-                }
-
-                // X-axis labels
-                ctx.fillStyle = 'rgba(255,255,255,0.25)';
-                ctx.textAlign = 'center';
-                const xLabels = ['Day 1', 'Day 7', 'Day 14', 'Day 21', 'Day 30'];
-                for (let i = 0; i < xLabels.length; i++) {
-                    const idx = Math.round((i / (xLabels.length - 1)) * (data.length - 1));
-                    ctx.fillText(xLabels[i], xPos(idx), h - 10);
-                }
-
-                if (drawCount < 2) {
-                    if (progress < 1) requestAnimationFrame(render);
-                    return;
-                }
-
-                // Gradient fill
-                const gradient = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
-                gradient.addColorStop(0, 'rgba(0, 210, 255, 0.18)');
-                gradient.addColorStop(0.5, 'rgba(0, 210, 255, 0.06)');
-                gradient.addColorStop(1, 'rgba(0, 210, 255, 0)');
-
+            // Draw points
+            data.forEach((val, i) => {
+                const x = padding + i * stepX;
+                const y = (h - padding) - (val / maxVal) * (h - padding*2);
                 ctx.beginPath();
-                ctx.moveTo(xPos(0), yPos(data[0]));
-                for (let i = 1; i < drawCount; i++) {
-                    const cx = (xPos(i - 1) + xPos(i)) / 2;
-                    ctx.quadraticCurveTo(xPos(i - 1), yPos(data[i - 1]), cx, (yPos(data[i - 1]) + yPos(data[i])) / 2);
-                }
-                ctx.quadraticCurveTo(xPos(drawCount - 2), yPos(data[drawCount - 2]), xPos(drawCount - 1), yPos(data[drawCount - 1]));
-
-                // Fill
-                ctx.lineTo(xPos(drawCount - 1), padTop + chartH);
-                ctx.lineTo(xPos(0), padTop + chartH);
-                ctx.closePath();
-                ctx.fillStyle = gradient;
+                ctx.arc(x, y, 6, 0, Math.PI*2);
+                ctx.fillStyle = '#04050f';
                 ctx.fill();
-
-                // Line stroke
-                ctx.beginPath();
-                ctx.moveTo(xPos(0), yPos(data[0]));
-                for (let i = 1; i < drawCount; i++) {
-                    const cx = (xPos(i - 1) + xPos(i)) / 2;
-                    ctx.quadraticCurveTo(xPos(i - 1), yPos(data[i - 1]), cx, (yPos(data[i - 1]) + yPos(data[i])) / 2);
-                }
-                ctx.quadraticCurveTo(xPos(drawCount - 2), yPos(data[drawCount - 2]), xPos(drawCount - 1), yPos(data[drawCount - 1]));
-                ctx.strokeStyle = 'rgba(0, 210, 255, 0.9)';
-                ctx.lineWidth = 2.5;
-                ctx.lineJoin = 'round';
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#db2777';
                 ctx.stroke();
-
-                // Glow line
-                ctx.strokeStyle = 'rgba(0, 210, 255, 0.3)';
-                ctx.lineWidth = 6;
-                ctx.stroke();
-
-                // End dot
-                if (drawCount > 1) {
-                    const lastX = xPos(drawCount - 1);
-                    const lastY = yPos(data[drawCount - 1]);
-
-                    // Glow
-                    ctx.beginPath();
-                    ctx.arc(lastX, lastY, 8, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 210, 255, 0.2)';
-                    ctx.fill();
-
-                    ctx.beginPath();
-                    ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
-                    ctx.fillStyle = '#00d2ff';
-                    ctx.fill();
-                    ctx.strokeStyle = 'rgba(0, 210, 255, 0.5)';
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-
-                    // Price label
-                    if (progress >= 0.8) {
-                        const labelOpacity = Math.min((progress - 0.8) / 0.2, 1);
-                        ctx.globalAlpha = labelOpacity;
-                        const priceText = '$' + Math.round(data[drawCount - 1]).toLocaleString();
-                        ctx.font = '600 12px Inter, sans-serif';
-                        const tw = ctx.measureText(priceText).width;
-                        const lx = lastX - tw / 2 - 8;
-                        const ly = lastY - 22;
-
-                        ctx.fillStyle = 'rgba(0, 210, 255, 0.15)';
-                        ctx.beginPath();
-                        ctx.roundRect(lx, ly - 10, tw + 16, 22, 6);
-                        ctx.fill();
-
-                        ctx.fillStyle = '#00d2ff';
-                        ctx.textAlign = 'center';
-                        ctx.fillText(priceText, lastX, ly + 5);
-                        ctx.globalAlpha = 1;
-                    }
-                }
-
-                if (progress < 1) requestAnimationFrame(render);
-            }
-
-            requestAnimationFrame(render);
-        }
-
-        const chartData = generateData(30);
-        const chartCanvas = document.getElementById('priceChart');
-
-        // Wait a beat then draw
-        setTimeout(function() {
-            drawChart(chartCanvas, chartData, 2500);
-        }, 600);
-
-        // Redraw on resize
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
-                drawChart(chartCanvas, chartData, 800);
-            }, 200);
-        });
-
-        // Chart buttons
-        document.querySelectorAll('.chart-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.chart-btn').forEach(function(b) { b.classList.remove('active'); });
-                btn.classList.add('active');
-                const range = parseInt(btn.dataset.range);
-                const newData = generateData(range);
-                drawChart(chartCanvas, newData, 1500);
-            });
-        });
-
-        /* ===== HOLDINGS TABLE ===== */
-        const holdings = [
-            { symbol: 'AAPL', name: 'Apple Inc.', cls: 'aapl', shares: 145, price: 198.45, change: 2.34, sparkData: [4,6,5,7,8,6,9,8,10] },
-            { symbol: 'GOOGL', name: 'Alphabet Inc.', cls: 'googl', shares: 62, price: 176.82, change: 1.87, sparkData: [5,4,6,7,5,8,7,9,8] },
-            { symbol: 'TSLA', name: 'Tesla Inc.', cls: 'tsla', shares: 88, price: 248.91, change: -1.42, sparkData: [8,7,6,7,5,6,4,5,4] },
-            { symbol: 'MSFT', name: 'Microsoft Corp.', cls: 'msft', shares: 110, price: 442.57, change: 3.15, sparkData: [3,5,4,6,7,8,7,9,10] },
-            { symbol: 'NVDA', name: 'NVIDIA Corp.', cls: 'nvda', shares: 35, price: 131.28, change: 5.67, sparkData: [2,4,3,5,6,7,8,9,11] },
-            { symbol: 'AMZN', name: 'Amazon.com Inc.', cls: 'amzn', shares: 73, price: 205.74, change: -0.56, sparkData: [7,8,6,7,5,6,5,4,5] }
-        ];
-
-        const tbody = document.getElementById('holdingsBody');
-
-        holdings.forEach(function(h, idx) {
-            const tr = document.createElement('tr');
-            const isUp = h.change >= 0;
-            const changeDir = isUp ? 'up' : 'down';
-            const changeSymbol = isUp ? '▲' : '▼';
-            const changeSign = isUp ? '+' : '';
-
-            // Build sparkline bars
-            const maxSpark = Math.max(...h.sparkData);
-            let sparkHTML = '<div class="sparkline">';
-            h.sparkData.forEach(function(v, si) {
-                const ht = Math.max(4, (v / maxSpark) * 28);
-                const barClass = v >= h.sparkData[Math.max(0, si - 1)] ? 'up' : 'down';
-                sparkHTML += '<div class="bar ' + barClass + '" style="height:' + ht + 'px; animation-delay:' + (0.6 + idx * 0.1 + si * 0.05) + 's;"></div>';
-            });
-            sparkHTML += '</div>';
-
-            tr.innerHTML =
-                '<td>' +
-                    '<div class="stock-info">' +
-                        '<div class="stock-icon-wrap ' + h.cls + '">' + h.symbol.slice(0, 2) + '</div>' +
-                        '<div>' +
-                            '<div class="stock-name">' + h.symbol + '</div>' +
-                            '<div class="stock-fullname">' + h.name + '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</td>' +
-                '<td class="shares-val">' + h.shares + '</td>' +
-                '<td class="price-val">$' + h.price.toFixed(2) + '</td>' +
-                '<td>' + sparkHTML + '</td>' +
-                '<td>' +
-                    '<span class="change-badge ' + changeDir + '">' +
-                        changeSymbol + ' ' + changeSign + h.change.toFixed(2) + '%' +
-                    '</span>' +
-                '</td>';
-
-            tbody.appendChild(tr);
-        });
-
-        /* ===== TICKER BAR ===== */
-        const tickerData = [
-            { sym: 'AAPL', price: '198.45', chg: '+2.34%', dir: 'up' },
-            { sym: 'GOOGL', price: '176.82', chg: '+1.87%', dir: 'up' },
-            { sym: 'TSLA', price: '248.91', chg: '-1.42%', dir: 'down' },
-            { sym: 'MSFT', price: '442.57', chg: '+3.15%', dir: 'up' },
-            { sym: 'NVDA', price: '131.28', chg: '+5.67%', dir: 'up' },
-            { sym: 'AMZN', price: '205.74', chg: '-0.56%', dir: 'down' },
-            { sym: 'META', price: '524.31', chg: '+1.92%', dir: 'up' },
-            { sym: 'BRK.B', price: '457.22', chg: '+0.43%', dir: 'up' },
-            { sym: 'JPM', price: '201.85', chg: '-0.21%', dir: 'down' },
-            { sym: 'V', price: '289.14', chg: '+1.08%', dir: 'up' },
-            { sym: 'BTC', price: '71,432', chg: '+2.45%', dir: 'up' },
-            { sym: 'ETH', price: '3,842', chg: '+3.12%', dir: 'up' },
-        ];
-
-        const tickerTrack = document.getElementById('tickerTrack');
-        let tickerHTML = '';
-
-        // Duplicate for seamless loop
-        for (let rep = 0; rep < 2; rep++) {
-            tickerData.forEach(function(t) {
-                tickerHTML +=
-                    '<div class="ticker-item">' +
-                        '<span class="ticker-symbol">' + t.sym + '</span>' +
-                        '<span class="ticker-price">$' + t.price + '</span>' +
-                        '<span class="ticker-chg ' + t.dir + '">' + t.chg + '</span>' +
-                    '</div>' +
-                    '<span class="ticker-sep">•</span>';
+                
+                // Labels
+                ctx.fillStyle = '#a0aec0';
+                ctx.font = '12px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[i], x, h - 10);
             });
         }
-
-        tickerTrack.innerHTML = tickerHTML;
-
-        /* ===== RING ANIMATION ===== */
-        const style = document.createElement('style');
-        style.textContent = '@keyframes ringDraw { from { stroke-dasharray: 0 314.16; } }';
-        document.head.appendChild(style);
-
-        /* ===== BUTTON INTERACTIONS ===== */
-        document.querySelectorAll('.action-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                btn.style.transform = 'scale(0.92)';
-                setTimeout(function() { btn.style.transform = ''; }, 150);
-            });
-        });
-
-    })();
+        
+        setTimeout(resizeCanvas, 100);
     </script>
 </body>
 </html>

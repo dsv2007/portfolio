@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalGithubLink = document.getElementById('modal-github-link');
 
         const openModal = (projectId) => {
-            const data = projectsData[projectId];
+            const data = (window.projectData && window.projectData[projectId]) ? window.projectData[projectId] : projectsData[projectId];
             if(data) {
                 modalImg.src = data.image;
                 modalTitle.textContent = data.title;

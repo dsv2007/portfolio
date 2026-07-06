@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVote - E-Voting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #04050f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --indigo: #6366f1;
+            --green: #10b981;
+            --amber: #f59e0b;
+            --red: #ef4444;
+            --text-main: #f8f9fa;
+            --text-muted: #a0aec0;
+            --font-inter: 'Inter', sans-serif;
+            --font-outfit: 'Outfit', sans-serif;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-inter);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15), transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn {
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        .logo {
+            font-family: var(--font-outfit);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo-icon {
+            color: var(--indigo);
+            font-size: 1.8rem;
+        }
+
+        .dashboard {
+            flex: 1;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .main-content { display: flex; flex-direction: column; gap: 2rem; }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .metric-title { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .metric-value { font-family: var(--font-outfit); font-size: 2rem; font-weight: 700; color: var(--text-main); }
+
+        .candidate-results { display: flex; flex-direction: column; gap: 1rem; }
+        .candidate-row { display: flex; flex-direction: column; gap: 0.5rem; }
+        .candidate-header { display: flex; justify-content: space-between; font-size: 0.9rem; }
+        .progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; width: 0; transition: width 1s ease-out; }
+
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 1rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; border-bottom: 1px solid var(--card-border); }
+        td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        .badge { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+        .badge.verified { background: rgba(16, 185, 129, 0.2); color: var(--green); }
+        .badge.pending { background: rgba(245, 158, 11, 0.2); color: var(--amber); }
+
+        .feed-item {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            gap: 1rem;
+        }
+        .feed-time { color: var(--indigo); }
+
+        .schema {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+        .schema-box {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--indigo);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: rgba(99,102,241,0.1);
+        }
+        .schema-line {
+            height: 2px;
+            width: 30px;
+            background: var(--card-border);
+            position: relative;
+        }
+
+        .tech-stack {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--card-border);
+            margin-top: auto;
+        }
+        .tech-badge { background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; }
+
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../../index.html" class="back-btn">← Back to Portfolio</a>
+        <div class="logo">
+            <span class="logo-icon">🛡️</span> SecureVote <span style="font-size: 0.9rem; color: var(--text-muted); margin-left: 1rem; font-family: var(--font-inter); font-weight: 400;">E-Voting Management System</span>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <div class="main-content">
+            <div class="metrics">
+                <div class="card" style="animation-delay: 0.1s">
+                    <div class="metric-title">Total Registered Voters</div>
+                    <div class="metric-value count-up" data-target="1284">0</div>
+                </div>
+                <div class="card" style="animation-delay: 0.2s">
+                    <div class="metric-title">Total Votes Cast</div>
+                    <div class="metric-value count-up" data-target="876">0</div>
+                </div>
+                <div class="card" style="animation-delay: 0.3s">
+                    <div class="metric-title">Active Candidates</div>
+                    <div class="metric-value count-up" data-target="5">0</div>
+                </div>
+                <div class="card" style="animation-delay: 0.4s">
+                    <div class="metric-title">Current Turnout</div>
+                    <div class="metric-value"><span class="count-up" data-target="68.2" data-decimal="true">0</span>%</div>
+                </div>
+            </div>
+
+            <div class="card" style="animation-delay: 0.5s">
+                <h3 style="margin-bottom: 1.5rem; font-family: var(--font-outfit);">Live Election Results</h3>
+                <div class="candidate-results">
+                    <div class="candidate-row">
+                        <div class="candidate-header"><span>Candidate A</span><span>42% (368 votes)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="background: var(--indigo);" data-width="42%"></div></div>
+                    </div>
+                    <div class="candidate-row">
+                        <div class="candidate-header"><span>Candidate B</span><span>28% (245 votes)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="background: #06b6d4;" data-width="28%"></div></div>
+                    </div>
+                    <div class="candidate-row">
+                        <div class="candidate-header"><span>Candidate C</span><span>16% (140 votes)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="background: #8b5cf6;" data-width="16%"></div></div>
+                    </div>
+                    <div class="candidate-row">
+                        <div class="candidate-header"><span>Candidate D</span><span>9% (79 votes)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="background: var(--amber);" data-width="9%"></div></div>
+                    </div>
+                    <div class="candidate-row">
+                        <div class="candidate-header"><span>Candidate E</span><span>5% (44 votes)</span></div>
+                        <div class="progress-track"><div class="progress-fill" style="background: var(--red);" data-width="5%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card table-container" style="animation-delay: 0.6s">
+                <h3 style="margin-bottom: 1.5rem; font-family: var(--font-outfit);">Voter Registry</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Voter ID</th>
+                            <th>Name</th>
+                            <th>District</th>
+                            <th>Status</th>
+                            <th>Vote Cast</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>V-8472</td><td>John Doe</td><td>District 3</td><td><span class="badge verified">Verified</span></td><td>Yes</td></tr>
+                        <tr><td>V-9102</td><td>Jane Smith</td><td>District 1</td><td><span class="badge verified">Verified</span></td><td>Yes</td></tr>
+                        <tr><td>V-3341</td><td>Alan Turing</td><td>District 2</td><td><span class="badge pending">Pending</span></td><td>No</td></tr>
+                        <tr><td>V-7729</td><td>Ada Lovelace</td><td>District 4</td><td><span class="badge verified">Verified</span></td><td>Yes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="card" style="animation-delay: 0.7s">
+                <h3 style="margin-bottom: 1.5rem; font-family: var(--font-outfit);">Live Activity Feed</h3>
+                <div class="feed-item"><span class="feed-time">14:23:01</span><span>Voter #0847 cast vote in District 3</span></div>
+                <div class="feed-item"><span class="feed-time">14:21:45</span><span>Voter #9102 registered in District 1</span></div>
+                <div class="feed-item"><span class="feed-time">14:18:12</span><span>Voter #7729 cast vote in District 4</span></div>
+                <div class="feed-item"><span class="feed-time">14:15:30</span><span>System integrity check passed</span></div>
+                <div class="feed-item"><span class="feed-time">14:10:05</span><span>Voter #3341 submitted documents</span></div>
+            </div>
+
+            <div class="card" style="animation-delay: 0.8s">
+                <h3 style="margin-bottom: 0.5rem; font-family: var(--font-outfit);">Database Schema</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">SQL Relational Structure</p>
+                <div class="schema">
+                    <div class="schema-box">Voters</div>
+                    <div class="schema-line"></div>
+                    <div class="schema-box" style="border-color: #10b981; background: rgba(16,185,129,0.1)">Votes</div>
+                    <div class="schema-line"></div>
+                    <div class="schema-box">Candidates</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tech-stack">
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">SQL</span>
+        <span class="tech-badge">Database Design</span>
+        <span class="tech-badge">Full Stack</span>
+        <span class="tech-badge">Data Integrity</span>
+    </div>
+
+    <script>
+        // Count Up
+        document.querySelectorAll('.count-up').forEach(el => {
+            const target = parseFloat(el.getAttribute('data-target'));
+            const isDecimal = el.getAttribute('data-decimal') === 'true';
+            let current = 0;
+            const increment = target / 30;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.innerText = isDecimal ? target.toFixed(1) : Math.floor(target).toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    el.innerText = isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString();
+                }
+            }, 30);
+        });
+
+        // Progress Bars
+        setTimeout(() => {
+            document.querySelectorAll('.progress-fill').forEach(el => {
+                el.style.width = el.getAttribute('data-width');
+            });
+        }, 500);
+    </script>
+</body>
+</html>
