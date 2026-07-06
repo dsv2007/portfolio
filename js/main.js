@@ -113,22 +113,32 @@ document.addEventListener('DOMContentLoaded', () => {
             initParticles();
         });
 
+        const particleColors = [
+            `rgba(124, 58,  237, `,   // purple
+            `rgba(219, 39,  119, `,   // pink
+            `rgba(6,   182, 212, `,   // cyan
+            `rgba(16,  185, 129, `,   // green
+            `rgba(249, 115, 22,  `,   // orange
+            `rgba(0,   245, 255, `,   // neon-cyan
+        ];
+
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.color = `rgba(0, 240, 255, ${Math.random() * 0.5})`;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = Math.random() * 0.6 - 0.3;
+                const base = particleColors[Math.floor(Math.random() * particleColors.length)];
+                this.color = base + (Math.random() * 0.55 + 0.1) + `)`;
             }
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width)  this.x = 0;
+                if (this.x < 0)             this.x = canvas.width;
                 if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
+                if (this.y < 0)             this.y = canvas.height;
             }
             draw() {
                 ctx.fillStyle = this.color;
