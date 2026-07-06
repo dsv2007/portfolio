@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Santhivarshini D — AI & Data Science Engineer available for freelancing. Custom AI solutions, data-driven dashboards, and full-stack web applications. CGPA 8.59 | Coimbatore, India.">
-    <meta name="keywords" content="freelance developer, AI engineer, data scientist, web developer, Coimbatore, machine learning, full stack developer, hire developer India">
+    <meta name="description" content="Santhivarshini D — AI & Data Science Engineer. Python, SQL, Power BI, Tableau, AWS, full-stack developer. CGPA 8.59 | Coimbatore, India.">
+    <meta name="keywords" content="AI engineer, data scientist, web developer, Coimbatore, machine learning, full stack developer, Python developer India, NovaMind Cloud">
     <meta name="author" content="Santhivarshini D">
     
     <!-- Open Graph / LinkedIn -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dsv2007.github.io/portfolio/">
-    <meta property="og:title" content="Santhivarshini D | AI Engineer & Full-Stack Developer — Available for Freelancing">
-    <meta property="og:description" content="Crafting intelligent, scalable digital experiences. AI/ML solutions, data dashboards, and premium web applications. Let's build something extraordinary together.">
+    <meta property="og:url" content="https://portfolio-eight-sepia-17.vercel.app/">
+    <meta property="og:title" content="Santhivarshini D | AI & Data Science Engineer">
+    <meta property="og:description" content="3rd-year B.Tech AI & DS student with hands-on experience in Python, SQL, Power BI, Tableau, AWS, and full-stack development. NovaMind Cloud creator.">
     <meta property="og:image" content="https://dsv2007.github.io/portfolio/profile_avatar.jpg">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Santhivarshini D | AI Engineer & Freelance Developer">
-    <meta name="twitter:description" content="AI/ML solutions, data dashboards, and premium web apps. Available for freelancing.">
+    <meta name="twitter:title" content="Santhivarshini D | AI & Data Science Engineer">
+    <meta name="twitter:description" content="AI/ML solutions, data dashboards, and full-stack web apps.">
     <meta name="twitter:image" content="https://dsv2007.github.io/portfolio/profile_avatar.jpg">
     
     <!-- Canonical -->
-    <link rel="canonical" href="https://dsv2007.github.io/portfolio/">
+    <link rel="canonical" href="https://portfolio-eight-sepia-17.vercel.app/">
     
-    <title>Santhivarshini D | AI Engineer & Full-Stack Developer — Freelance</title>
+    <title>Santhivarshini D | AI & Data Science Engineer</title>
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -31,18 +31,14 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Santhivarshini D",
-        "url": "https://dsv2007.github.io/portfolio/",
+        "url": "https://portfolio-eight-sepia-17.vercel.app/",
         "image": "https://dsv2007.github.io/portfolio/profile_avatar.jpg",
         "jobTitle": "AI & Data Science Engineer",
-        "worksFor": {
-            "@type": "Organization",
-            "name": "Freelance"
-        },
         "alumniOf": {
             "@type": "EducationalOrganization",
             "name": "Karpagam Academy of Higher Education"
         },
-        "knowsAbout": ["Artificial Intelligence", "Data Science", "Machine Learning", "Web Development", "Python", "React", "TensorFlow"],
+        "knowsAbout": ["Artificial Intelligence", "Data Science", "Machine Learning", "Web Development", "Python", "SQL", "Power BI"],
         "sameAs": [
             "https://www.linkedin.com/in/santhivarshini-d-66b705324",
             "https://github.com/dsv2007"
@@ -56,6 +52,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
     <!-- Local CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Certifications Section */
+        .certifications { padding: 6rem 0; }
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        .cert-card {
+            padding: 1.5rem 1.8rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cert-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(99,102,241,0.25); }
+        .cert-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .cert-body { flex: 1; }
+        .cert-body strong { display: block; font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--text-main); margin-bottom: 0.3rem; font-size: 0.95rem; }
+        .cert-body span { font-size: 0.82rem; color: var(--text-muted); }
+        .cert-score { display: inline-block; margin-top: 0.4rem; font-size: 0.78rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: rgba(99,102,241,0.18); color: var(--accent-neon); font-weight: 600; }
+
+        /* Internship Section */
+        .internships { padding: 6rem 0; }
+        .intern-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+        .intern-card { padding: 1.8rem 2rem; border-radius: 1rem; }
+        .intern-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .intern-title { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+        .intern-company { font-size: 0.85rem; color: var(--accent-neon); font-weight: 600; margin-top: 0.2rem; }
+        .intern-meta { font-size: 0.8rem; color: var(--text-muted); text-align: right; }
+        .intern-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .intern-card ul li { font-size: 0.9rem; color: var(--text-muted); padding-left: 1.2rem; position: relative; }
+        .intern-card ul li::before { content: 'b'; position: absolute; left: 0; color: var(--accent-neon); font-size: 0.75rem; top: 0.1rem; }
+
+        /* Hire Me CTA Box */
+        .hire-cta-box {
+            margin-top: 3rem;
+            padding: 3rem 2.5rem;
+            border-radius: 1.5rem;
+            text-align: center;
+        }
+        .hire-cta-box h3 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: var(--text-main); margin-bottom: 1rem; }
+        .hire-cta-box p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; line-height: 1.8; }
+        .hire-cta-box .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        /* Achievement pills */
+        .achievements-bar { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+        .achievement-pill { padding: 0.5rem 1.1rem; border-radius: 999px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.25); font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+        .achievement-pill span { color: var(--accent-neon); font-weight: 700; }
+    </style>
 </head>
 <body>
     <!-- Particle Canvas Background -->
@@ -80,9 +129,10 @@
         <div class="container nav-container">
             <a href="#" class="logo">Santhivarshini<span> D</span></a>
             <nav class="nav-links">
-                <a href="#services">Services</a>
+                <a href="#services">Skills</a>
                 <a href="#portfolio">Work</a>
-                <a href="#hire-me">Hire Me</a>
+                <a href="#internships">Experience</a>
+                <a href="#certifications">Certs</a>
                 <a href="#about">About</a>
                 <a href="https://www.linkedin.com/in/santhivarshini-d-66b705324" target="_blank" class="nav-linkedin-link" title="LinkedIn Profile">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -103,13 +153,20 @@
             <div class="hero-text reveal-up">
                 <div class="available-badge">
                     <span class="pulse-dot"></span>
-                    <span>Available for Freelancing</span>
+                    <span>3rd Year B.Tech AI &amp; DS — Karpagam Academy</span>
                 </div>
                 <h1 class="hero-title">Hi, I'm <br><span class="gradient-text" id="typewriter"></span><span class="type-cursor">|</span></h1>
-                <p class="hero-subtitle">"Bridging the gap between complex machine learning architectures and high-fidelity web experiences. I engineer scalable, data-driven web platforms designed to solve real-world industry challenges."</p>
+                <p class="hero-subtitle">"Bridging the gap between complex data analytics and scalable web platforms. I build AI-powered dashboards, full-stack systems, and data-driven solutions that solve real-world industry challenges."</p>
                 <div class="hero-cta">
                     <a href="#hire-me" class="btn btn-primary btn-glow">Hire Me</a>
                     <a href="#portfolio" class="btn btn-secondary">Explore Work</a>
+                </div>
+                <div class="achievements-bar">
+                    <div class="achievement-pill">CGPA <span>8.59</span></div>
+                    <div class="achievement-pill"><span>4+</span> Projects Deployed</div>
+                    <div class="achievement-pill"><span>3</span> Virtual Internships</div>
+                    <div class="achievement-pill"><span>Infosys</span> Tech A Certified</div>
+                    <div class="achievement-pill"><span>NPTEL</span> Cloud 78/100</div>
                 </div>
             </div>
             <div class="hero-visual reveal-up" style="transition-delay: 0.2s;">
@@ -119,10 +176,10 @@
                         <img src="profile_avatar.jpg" alt="Santhivarshini D" class="profile-img">
                     </div>
                     <div class="floating-badge badge-top">
-                        <span>🧠 AI & DS Engineer</span>
+                        <span>&#x1F9E0; AI &amp; DS Engineer</span>
                     </div>
                     <div class="floating-badge badge-bottom">
-                        <span>📍 Coimbatore, IN</span>
+                        <span>&#x1F4CD; Coimbatore, IN</span>
                     </div>
                 </div>
             </div>
@@ -138,20 +195,18 @@
             </div>
             <div class="metric-divider"></div>
             <div class="metric-item">
-                <strong class="metric-value" data-target="5" data-suffix="+">0</strong>
-                <span class="metric-label">AI & Web Projects</span>
+                <strong class="metric-value" data-target="4" data-suffix="+">0</strong>
+                <span class="metric-label">Projects Built</span>
             </div>
             <div class="metric-divider"></div>
             <div class="metric-item">
-                <strong class="metric-value status-open">
-                    <span class="pulse-dot-sm"></span> Open
-                </strong>
-                <span class="metric-label">For Freelancing</span>
+                <strong class="metric-value" data-target="3" data-suffix="">0</strong>
+                <span class="metric-label">Virtual Internships</span>
             </div>
             <div class="metric-divider"></div>
             <div class="metric-item">
-                <strong class="metric-value" data-target="100" data-suffix="%">0</strong>
-                <span class="metric-label">Client Satisfaction</span>
+                <strong class="metric-value" data-target="10" data-suffix="+">0</strong>
+                <span class="metric-label">Certifications</span>
             </div>
         </div>
     </section>
@@ -161,141 +216,138 @@
         <div class="container">
             <div class="section-header reveal-up">
                 <h2 class="section-title">Core <span class="gradient-text">Expertise</span></h2>
-                <p class="section-desc">Bridging mathematical machine learning with high-performance web systems.</p>
+                <p class="section-desc">Combining analytical AI/DS foundations with modern web and cloud technologies.</p>
             </div>
             
             <div class="expertise-matrix">
-                <!-- Category 1: Artificial Intelligence -->
+                <!-- Data Analysis & BI -->
                 <div class="expertise-card glass-card reveal-up tilt-card">
-                    <div class="expertise-header">
-                        <div class="icon-wrapper">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="neon-icon"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="2"/></svg>
-                        </div>
-                        <h3>Artificial Intelligence</h3>
-                    </div>
-                    <p class="expertise-desc">Designing neural architectures, custom hyperparameter tuning, and deploying ML models.</p>
-                    <div class="skills-list">
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">Scikit-Learn</span>
-                        <span class="skill-tag">Deep Learning</span>
-                        <span class="skill-tag">Neural Nets</span>
-                        <span class="skill-tag">LLM Tuning</span>
-                    </div>
-                </div>
-                
-                <!-- Category 2: Data Science & Analytics -->
-                <div class="expertise-card glass-card reveal-up tilt-card" style="transition-delay: 0.1s;">
                     <div class="expertise-header">
                         <div class="icon-wrapper">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="neon-icon"><path d="M21 21H3V3m18 4l-7 7-4-4-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <h3>Data Science & Analytics</h3>
+                        <h3>Data Analysis &amp; BI</h3>
                     </div>
-                    <p class="expertise-desc">Extracting insights from unstructured data pipelines and building scalable analysis dashboards.</p>
+                    <p class="expertise-desc">Extracting actionable insights from data with dashboards, EDA, and statistical reporting.</p>
                     <div class="skills-list">
+                        <span class="skill-tag">Excel &amp; Pivot Tables</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Tableau</span>
                         <span class="skill-tag">Python (Pandas/NumPy)</span>
-                        <span class="skill-tag">R Programming</span>
-                        <span class="skill-tag">SQL Databases</span>
-                        <span class="skill-tag">Data Visualization</span>
-                        <span class="skill-tag">Statistical Modeling</span>
-                        <span class="skill-tag">ETL Pipelines</span>
+                        <span class="skill-tag">Data Cleaning &amp; EDA</span>
+                        <span class="skill-tag">Statistical Dashboards</span>
                     </div>
                 </div>
                 
-                <!-- Category 3: Full Stack Systems -->
-                <div class="expertise-card glass-card reveal-up tilt-card" style="transition-delay: 0.2s;">
+                <!-- Programming & Databases -->
+                <div class="expertise-card glass-card reveal-up tilt-card" style="transition-delay: 0.1s;">
                     <div class="expertise-header">
                         <div class="icon-wrapper">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="neon-icon"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </div>
-                        <h3>Full Stack Systems</h3>
+                        <h3>Programming &amp; Databases</h3>
                     </div>
-                    <p class="expertise-desc">Building elegant, responsive, and secure user interfaces with clean backend endpoints.</p>
+                    <p class="expertise-desc">Writing clean, efficient code with strong database schema design and query skills.</p>
                     <div class="skills-list">
-                        <span class="skill-tag">HTML5 / CSS3</span>
-                        <span class="skill-tag">JavaScript (ES6+)</span>
-                        <span class="skill-tag">React.js / Next.js</span>
-                        <span class="skill-tag">Tailwind CSS</span>
-                        <span class="skill-tag">Node.js / Express</span>
-                        <span class="skill-tag">RESTful APIs</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Java Fundamentals</span>
+                        <span class="skill-tag">Go Basics</span>
+                        <span class="skill-tag">Database Schema Design</span>
+                        <span class="skill-tag">Query Writing</span>
+                    </div>
+                </div>
+                
+                <!-- Cloud & AI/ML -->
+                <div class="expertise-card glass-card reveal-up tilt-card" style="transition-delay: 0.2s;">
+                    <div class="expertise-header">
+                        <div class="icon-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="neon-icon"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="2"/></svg>
+                        </div>
+                        <h3>Cloud &amp; AI/ML</h3>
+                    </div>
+                    <p class="expertise-desc">Deploying on cloud platforms and integrating AI/ML concepts into production-grade apps.</p>
+                    <div class="skills-list">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Azure Basics</span>
+                        <span class="skill-tag">Snowflake</span>
+                        <span class="skill-tag">Databricks</span>
+                        <span class="skill-tag">AI/DS Fundamentals</span>
+                        <span class="skill-tag">Agentic AI Concepts</span>
+                    </div>
+                </div>
+
+                <!-- Full Stack & Tools -->
+                <div class="expertise-card glass-card reveal-up tilt-card" style="transition-delay: 0.3s;">
+                    <div class="expertise-header">
+                        <div class="icon-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="neon-icon"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        </div>
+                        <h3>Full Stack &amp; Tools</h3>
+                    </div>
+                    <p class="expertise-desc">Building responsive web applications and managing code with modern DevOps tooling.</p>
+                    <div class="skills-list">
+                        <span class="skill-tag">HTML / CSS / JavaScript</span>
+                        <span class="skill-tag">Git &amp; GitHub</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Raspberry Pi</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Vercel Deployment</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
+    <!-- Portfolio / Projects Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="section-header reveal-up">
-                <h2 class="section-title">Selected <span class="gradient-text">Work</span></h2>
-                <p class="section-desc">Click any project to see it live — fully interactive demos built from scratch.</p>
+                <h2 class="section-title">Selected <span class="gradient-text">Projects</span></h2>
+                <p class="section-desc">Academic and production-grade projects built from scratch — covering AI, analytics, and full-stack systems.</p>
             </div>
             <div class="portfolio-grid">
-                <!-- Project 1 -->
+                <!-- NovaMind Cloud -->
                 <div class="portfolio-item reveal-up tilt-card">
-                    <img src="projects/nova/thumbnail.png" alt="Nova Finance Dashboard" loading="lazy">
+                    <img src="projects/nova/thumbnail.png" alt="NovaMind Cloud — AI-Powered BI Analytics Dashboard" loading="lazy">
                     <div class="portfolio-overlay">
                         <div class="portfolio-content">
-                            <h3>Nova Finance</h3>
-                            <p>Fintech Dashboard & Analytics</p>
+                            <h3>NovaMind Cloud</h3>
+                            <p>AI-Powered BI &amp; Analytics Dashboard</p>
                             <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="nova">View Project</a>
                         </div>
                     </div>
                 </div>
-                <!-- Project 2 -->
+                <!-- E-Voting System -->
                 <div class="portfolio-item reveal-up tilt-card" style="transition-delay: 0.1s;">
-                    <img src="projects/aura/thumbnail.png" alt="Aura Boutique E-Commerce" loading="lazy">
+                    <img src="projects/aura/thumbnail.png" alt="E-Voting System — Python SQL Full Stack" loading="lazy">
                     <div class="portfolio-overlay">
                         <div class="portfolio-content">
-                            <h3>Aura Boutique</h3>
-                            <p>Luxury E-Commerce Platform</p>
-                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="aura">View Project</a>
+                            <h3>E-Voting System</h3>
+                            <p>Python / SQL / Full-Stack</p>
+                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="evoting">View Project</a>
                         </div>
                     </div>
                 </div>
-                <!-- Project 3 -->
+                <!-- Digital Civics System -->
                 <div class="portfolio-item reveal-up tilt-card" style="transition-delay: 0.2s;">
-                    <img src="projects/synapse/thumbnail.png" alt="Synapse AI SaaS App" loading="lazy">
+                    <img src="projects/synapse/thumbnail.png" alt="Digital Civics System — Python AI-DS Full Stack" loading="lazy">
                     <div class="portfolio-overlay">
                         <div class="portfolio-content">
-                            <h3>Synapse AI</h3>
-                            <p>SaaS Web Application</p>
-                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="synapse">View Project</a>
+                            <h3>Digital Civics System</h3>
+                            <p>Python / AI-DS / Full-Stack</p>
+                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="civics">View Project</a>
                         </div>
                     </div>
                 </div>
-                <!-- Project 4 -->
+                <!-- Personal Portfolio -->
                 <div class="portfolio-item reveal-up tilt-card">
-                    <img src="projects/lumina/thumbnail.png" alt="Lumina Architecture Studio" loading="lazy">
+                    <img src="projects/skillbridge/thumbnail.png" alt="Personal Portfolio Website" loading="lazy">
                     <div class="portfolio-overlay">
                         <div class="portfolio-content">
-                            <h3>Lumina Studio</h3>
-                            <p>Corporate Branding & Web Design</p>
-                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="lumina">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 5 -->
-                <div class="portfolio-item reveal-up tilt-card" style="transition-delay: 0.1s;">
-                    <img src="projects/quantum/thumbnail.png" alt="Quantum AI Dashboard" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-content">
-                            <h3>Quantum AI</h3>
-                            <p>AI Resume Analyzer & Neural Hyperparameter Hub</p>
-                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="quantum">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 6 -->
-                <div class="portfolio-item reveal-up tilt-card" style="transition-delay: 0.2s;">
-                    <img src="projects/skillbridge/thumbnail.png" alt="SkillBridge AI" loading="lazy">
-                    <div class="portfolio-overlay">
-                        <div class="portfolio-content">
-                            <h3>SkillBridge AI</h3>
-                            <p>AI Placement Mentor & Readiness Dashboard</p>
-                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="skillbridge">View Project</a>
+                            <h3>Personal Portfolio</h3>
+                            <p>HTML / CSS / JavaScript / GitHub</p>
+                            <a href="#portfolio" class="btn btn-outline-light view-project-btn" data-project="portfolio">View Project</a>
                         </div>
                     </div>
                 </div>
@@ -303,7 +355,150 @@
         </div>
     </section>
 
-    <!-- Hire Me CTA Section -->
+    <!-- Internship Experience Section -->
+    <section id="internships" class="internships">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2 class="section-title">Internship <span class="gradient-text">Experience</span></h2>
+                <p class="section-desc">3 virtual internships across top organisations — building real analytical and engineering skills.</p>
+            </div>
+            <div class="intern-list">
+                <!-- Deloitte -->
+                <div class="intern-card glass-card reveal-up">
+                    <div class="intern-header">
+                        <div>
+                            <div class="intern-title">Data Analysis &amp; Virtualization Intern</div>
+                            <div class="intern-company">Deloitte (Forage)</div>
+                        </div>
+                        <div class="intern-meta">Virtual / Remote</div>
+                    </div>
+                    <ul>
+                        <li>Performed data analysis tasks simulating consulting workflows — dataset cleaning, structuring, and insight generation.</li>
+                        <li>Created dashboard visualization concepts to communicate analytical findings clearly to stakeholders.</li>
+                        <li>Applied data virtualization concepts to draw insights from structured datasets across multiple sources.</li>
+                        <li>Strengthened understanding of how analytics supports enterprise decision-making and business reporting.</li>
+                    </ul>
+                </div>
+                <!-- Tata -->
+                <div class="intern-card glass-card reveal-up" style="transition-delay: 0.1s;">
+                    <div class="intern-header">
+                        <div>
+                            <div class="intern-title">Data Virtualization Intern</div>
+                            <div class="intern-company">Tata (Forage)</div>
+                        </div>
+                        <div class="intern-meta">Virtual / Remote</div>
+                    </div>
+                    <ul>
+                        <li>Explored enterprise data virtualization concepts for consolidating data from multiple sources without physical movement.</li>
+                        <li>Completed simulation tasks reflecting real-world data engineering, data integration, and structured reporting scenarios.</li>
+                        <li>Applied foundational SQL and data management knowledge to analyze and present structured insights.</li>
+                    </ul>
+                </div>
+                <!-- Infosys -->
+                <div class="intern-card glass-card reveal-up" style="transition-delay: 0.2s;">
+                    <div class="intern-header">
+                        <div>
+                            <div class="intern-title">Virtual Intern</div>
+                            <div class="intern-company">Infosys Springboard</div>
+                        </div>
+                        <div class="intern-meta">8 Weeks / Remote</div>
+                    </div>
+                    <ul>
+                        <li>Completed an 8-week structured virtual internship covering Linux, Raspberry Pi, and Go Programming.</li>
+                        <li>Earned 3 Infosys Tech A certifications (Linux Programming Foundation, Raspberry Pi Foundation, Go Programming) and built discipline through timely deliverables and hands-on open-source tooling exposure.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & Achievements Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <h2 class="section-title">Certifications &amp; <span class="gradient-text">Achievements</span></h2>
+                <p class="section-desc">Industry-recognized credentials demonstrating continuous learning and technical depth.</p>
+            </div>
+            <div class="cert-grid reveal-up">
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F393;</div>
+                    <div class="cert-body">
+                        <strong>NPTEL — Cloud Computing</strong>
+                        <span>National Programme on Technology Enhanced Learning</span>
+                        <div class="cert-score">Score: 78/100</div>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F393;</div>
+                    <div class="cert-body">
+                        <strong>NPTEL — Enhancing Soft Skills &amp; Personality</strong>
+                        <span>National Programme on Technology Enhanced Learning</span>
+                        <div class="cert-score">Score: 70/100</div>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F393;</div>
+                    <div class="cert-body">
+                        <strong>NPTEL — Understanding Incubation &amp; Entrepreneurship</strong>
+                        <span>National Programme on Technology Enhanced Learning</span>
+                        <div class="cert-score">Score: 90/100</div>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F393;</div>
+                    <div class="cert-body">
+                        <strong>NPTEL — Operating Systems</strong>
+                        <span>National Programme on Technology Enhanced Learning</span>
+                        <div class="cert-score">Score: 55/100</div>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F3C5;</div>
+                    <div class="cert-body">
+                        <strong>Infosys Tech A — Linux Programming Foundation</strong>
+                        <span>Infosys Springboard · Virtual Internship</span>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F3C5;</div>
+                    <div class="cert-body">
+                        <strong>Infosys Tech A — Raspberry Pi Foundation</strong>
+                        <span>Infosys Springboard · Virtual Internship</span>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F3C5;</div>
+                    <div class="cert-body">
+                        <strong>Infosys Tech A — Go Programming</strong>
+                        <span>Infosys Springboard · Virtual Internship</span>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F4BC;</div>
+                    <div class="cert-body">
+                        <strong>Completed Virtual Internship — Deloitte</strong>
+                        <span>Data Analysis &amp; Virtualization · Forage</span>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F4BC;</div>
+                    <div class="cert-body">
+                        <strong>Completed Virtual Internship — Tata</strong>
+                        <span>Data Virtualization · Forage</span>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">&#x1F4BC;</div>
+                    <div class="cert-body">
+                        <strong>Completed Virtual Internship — Infosys</strong>
+                        <span>8-Week Structured Programme</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hire Me CTA Section (pricing removed) -->
     <section id="hire-me" class="hire-me-section">
         <div class="container">
             <div class="section-header reveal-up">
@@ -315,76 +510,40 @@
             <div class="process-steps reveal-up">
                 <div class="process-step">
                     <div class="step-number">01</div>
-                    <div class="step-icon">💬</div>
+                    <div class="step-icon">&#x1F4AC;</div>
                     <h4>Discuss</h4>
                     <p>Share your vision and requirements. I'll analyze feasibility and propose solutions.</p>
                 </div>
                 <div class="process-connector"></div>
                 <div class="process-step">
                     <div class="step-number">02</div>
-                    <div class="step-icon">🎨</div>
+                    <div class="step-icon">&#x1F3A8;</div>
                     <h4>Design</h4>
                     <p>Wireframes, mockups, and architecture planning. You approve before coding begins.</p>
                 </div>
                 <div class="process-connector"></div>
                 <div class="process-step">
                     <div class="step-number">03</div>
-                    <div class="step-icon">⚡</div>
+                    <div class="step-icon">&#x26A1;</div>
                     <h4>Develop</h4>
                     <p>Clean, scalable code with regular progress updates and milestone demos.</p>
                 </div>
                 <div class="process-connector"></div>
                 <div class="process-step">
                     <div class="step-number">04</div>
-                    <div class="step-icon">🚀</div>
+                    <div class="step-icon">&#x1F680;</div>
                     <h4>Deliver</h4>
-                    <p>Fully tested deployment with documentation and 30 days of free support.</p>
+                    <p>Fully tested deployment with documentation and post-delivery support.</p>
                 </div>
             </div>
 
-            <!-- Pricing Tiers -->
-            <div class="pricing-grid reveal-up">
-                <div class="pricing-card glass-card tilt-card">
-                    <div class="pricing-tier">Starter</div>
-                    <div class="pricing-amount">₹5,000<span>/project</span></div>
-                    <ul class="pricing-features">
-                        <li>✓ Single-page website</li>
-                        <li>✓ Responsive design</li>
-                        <li>✓ Contact form integration</li>
-                        <li>✓ SEO basics</li>
-                        <li>✓ 1 revision round</li>
-                        <li>✓ 7-day delivery</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline">Get Started</a>
-                </div>
-                <div class="pricing-card glass-card pricing-featured tilt-card">
-                    <div class="popular-badge">Most Popular</div>
-                    <div class="pricing-tier">Professional</div>
-                    <div class="pricing-amount">₹15,000<span>/project</span></div>
-                    <ul class="pricing-features">
-                        <li>✓ Multi-page web application</li>
-                        <li>✓ Custom animations & effects</li>
-                        <li>✓ Database integration</li>
-                        <li>✓ API development</li>
-                        <li>✓ 3 revision rounds</li>
-                        <li>✓ 14-day delivery</li>
-                        <li>✓ AI/ML feature integration</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary btn-glow">Get Started</a>
-                </div>
-                <div class="pricing-card glass-card tilt-card">
-                    <div class="pricing-tier">Enterprise</div>
-                    <div class="pricing-amount">₹40,000<span>+</span></div>
-                    <ul class="pricing-features">
-                        <li>✓ Full-stack SaaS platform</li>
-                        <li>✓ AI/ML model training & deployment</li>
-                        <li>✓ Real-time dashboards</li>
-                        <li>✓ Cloud deployment (AWS/GCP)</li>
-                        <li>✓ Unlimited revisions</li>
-                        <li>✓ 30-day delivery</li>
-                        <li>✓ Priority support</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+            <!-- CTA Box (replaces pricing) -->
+            <div class="hire-cta-box glass-card reveal-up">
+                <h3>Ready to Build Something <span class="gradient-text">Extraordinary?</span></h3>
+                <p>Whether you need a custom AI solution, an analytics dashboard, a full-stack web application, or a data-driven platform — reach out and let's discuss your project. I'm open to internship opportunities, project collaborations, and freelance work.</p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn btn-primary btn-glow">Send an Inquiry</a>
+                    <a href="https://www.linkedin.com/in/santhivarshini-d-66b705324" target="_blank" class="btn btn-outline">Connect on LinkedIn</a>
                 </div>
             </div>
         </div>
@@ -400,7 +559,10 @@
                         Hello! I am <strong>Santhivarshini D</strong>, a passionate developer currently pursuing my <strong>3rd year of B.Tech in Artificial Intelligence and Data Science</strong> at <strong>Karpagam Academy of Higher Education, Coimbatore</strong> with a <strong>CGPA of 8.59</strong>.
                     </p>
                     <p class="about-text">
-                        Combining my analytical background in AI and Data Science with modern web technologies, I specialize in building elegant, intelligent, and scalable digital experiences. I am also <strong>available for freelancing</strong> — whether you need a custom AI solution, a data-driven dashboard, or a full-stack web application, I deliver production-quality results tailored to your business needs.
+                        I have completed <strong>3 virtual internships</strong> across Deloitte, Tata, and Infosys, and built <strong>4+ academic/production-grade projects</strong> including <strong>NovaMind Cloud</strong> — a Vercel-deployed AI-powered analytics platform. I am strong in data cleaning, EDA, dashboard reporting, database design, and translating business problems into practical analytics solutions.
+                    </p>
+                    <p class="about-text">
+                        I hold <strong>Infosys Tech A certifications</strong> in Linux Programming Foundation, <strong>Raspberry Pi Foundation</strong>, and <strong>Go Programming</strong> — earned during my 8-week Infosys virtual internship. I also hold <strong>4 NPTEL certifications</strong> including Cloud Computing (78/100) and Entrepreneurship (90/100).
                     </p>
                     <div class="hero-cta" style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                         <a href="https://www.linkedin.com/in/santhivarshini-d-66b705324" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
@@ -420,31 +582,31 @@
             <div class="contact-wrapper glass-card reveal-up">
                 <div class="contact-info">
                     <h2>Ready to build something<br><span class="gradient-text">extraordinary?</span></h2>
-                    <p>Fill out the form with your project details, and I'll get back to you within 24 hours with a proposal.</p>
+                    <p>Fill out the form with your project details, and I'll get back to you within 24 hours.</p>
                     <div class="contact-details">
                         <div class="contact-detail-item">
-                            <span class="contact-icon">📧</span>
+                            <span class="contact-icon">&#x1F4E7;</span>
                             <div>
                                 <strong>Email</strong>
                                 <p>santhivarshinidevan@gmail.com</p>
                             </div>
                         </div>
                         <div class="contact-detail-item">
-                            <span class="contact-icon">📱</span>
+                            <span class="contact-icon">&#x1F4F1;</span>
                             <div>
                                 <strong>Phone</strong>
-                                <p>6369083465</p>
+                                <p>+91 6369083465</p>
                             </div>
                         </div>
                         <div class="contact-detail-item">
-                            <span class="contact-icon">💼</span>
+                            <span class="contact-icon">&#x1F4BC;</span>
                             <div>
                                 <strong>LinkedIn</strong>
                                 <p><a href="https://www.linkedin.com/in/santhivarshini-d-66b705324" target="_blank" style="color: var(--accent-neon);">View Profile</a></p>
                             </div>
                         </div>
                         <div class="contact-detail-item">
-                            <span class="contact-icon">🐙</span>
+                            <span class="contact-icon">&#x1F419;</span>
                             <div>
                                 <strong>GitHub</strong>
                                 <p><a href="https://github.com/dsv2007" target="_blank" style="color: var(--accent-neon);">View Repos</a></p>
@@ -454,8 +616,7 @@
                 </div>
                 <div class="contact-form-container">
                     <form action="https://formsubmit.co/santhivarshinidevan@gmail.com" method="POST" class="contact-form" id="contactForm">
-                        <!-- Hidden fields for FormSubmit configuration -->
-                        <input type="hidden" name="_subject" value="🚀 New Freelance Inquiry - Portfolio">
+                        <input type="hidden" name="_subject" value="New Inquiry — Santhivarshini Portfolio">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_next" value="https://dsv2007.github.io/portfolio/thankyou.html">
@@ -472,34 +633,35 @@
                         </div>
                         <div class="form-row">
                             <div class="input-group">
-                                <label for="project-type">Project Type</label>
+                                <label for="project-type">Inquiry Type</label>
                                 <select name="project_type" id="project-type" required>
-                                    <option value="" disabled selected>Select a service...</option>
+                                    <option value="" disabled selected>Select type...</option>
+                                    <option value="Internship / Job Opportunity">Internship / Job Opportunity</option>
+                                    <option value="Project Collaboration">Project Collaboration</option>
                                     <option value="Website Development">Website Development</option>
                                     <option value="AI/ML Solution">AI / Machine Learning Solution</option>
                                     <option value="Data Dashboard">Data Dashboard / Analytics</option>
                                     <option value="Full-Stack Web App">Full-Stack Web Application</option>
-                                    <option value="E-Commerce">E-Commerce Platform</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
                             <div class="input-group">
-                                <label for="budget">Budget Range</label>
-                                <select name="budget" id="budget" required>
-                                    <option value="" disabled selected>Select budget...</option>
-                                    <option value="Under ₹5,000">Under ₹5,000</option>
-                                    <option value="₹5,000 - ₹15,000">₹5,000 — ₹15,000</option>
-                                    <option value="₹15,000 - ₹40,000">₹15,000 — ₹40,000</option>
-                                    <option value="₹40,000+">₹40,000+</option>
+                                <label for="budget">Timeline</label>
+                                <select name="timeline" id="budget">
+                                    <option value="" disabled selected>Select timeline...</option>
+                                    <option value="Immediately">Immediately</option>
+                                    <option value="Within 1 week">Within 1 week</option>
+                                    <option value="Within 1 month">Within 1 month</option>
+                                    <option value="Flexible">Flexible</option>
                                 </select>
                             </div>
                         </div>
                         <div class="input-group">
-                            <label for="message">Project Details</label>
-                            <textarea name="message" id="message" rows="4" placeholder="Describe your project — goals, features, timeline, any references..." required></textarea>
+                            <label for="message">Details</label>
+                            <textarea name="message" id="message" rows="4" placeholder="Describe your project, opportunity, or collaboration idea..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-glow w-100" id="submitBtn">
-                            <span>Send Inquiry</span>
+                            <span>Send Message</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
                         </button>
                     </form>
@@ -513,8 +675,8 @@
         <div class="container footer-container">
             <div class="footer-brand">
                 <a href="#" class="logo">Santhivarshini<span> D</span></a>
-                <p>AI Engineer · Data Scientist · Full-Stack Developer</p>
-                <p class="footer-tagline">Available for freelance projects worldwide.</p>
+                <p>AI &amp; DS Engineer · Full-Stack Developer · Data Analyst</p>
+                <p class="footer-tagline">Open to internships, collaborations &amp; projects.</p>
             </div>
             <div class="footer-links">
                 <a href="https://github.com/dsv2007" target="_blank">GitHub</a>
@@ -556,5 +718,43 @@
 
     <!-- Local JS -->
     <script src="js/main.js"></script>
+
+    <script>
+    // Updated project data matching resume
+    window.projectData = {
+        nova: {
+            title: "NovaMind Cloud",
+            desc: "A Vercel-hosted AI-powered analytics platform that converts datasets and AI-generated outputs into statistical summaries and dashboard-ready insights. Built using Python, Pandas, and NumPy for data cleaning, EDA, transformation, and analytical processing. Designed reporting workflows aligned with Power BI/Tableau-style dashboard presentation for faster decision-making.",
+            tags: ["Python", "Pandas", "NumPy", "Power BI Style", "Vercel", "AI/ML"],
+            img: "projects/nova/thumbnail.png",
+            live: "#",
+            github: "https://github.com/dsv2007"
+        },
+        evoting: {
+            title: "E-Voting System",
+            desc: "Designed a SQL database schema for voters, candidates, and vote tallying with data integrity checks. Implemented backend logic for registration, validation, and vote processing. Applied SQL queries for structured storage, retrieval, and reporting of voting data.",
+            tags: ["Python", "SQL", "Database Design", "Full Stack", "Data Integrity"],
+            img: "projects/aura/thumbnail.png",
+            live: "#",
+            github: "https://github.com/dsv2007"
+        },
+        civics: {
+            title: "Digital Civics System",
+            desc: "Developed data-driven modules for citizen queries, petitions, and structured information access using AI/DS concepts. Built features focused on organizing user input, managing records, and improving access to civic information.",
+            tags: ["Python", "AI/DS", "Full Stack", "Data Management"],
+            img: "projects/synapse/thumbnail.png",
+            live: "#",
+            github: "https://github.com/dsv2007"
+        },
+        portfolio: {
+            title: "Personal Portfolio Website",
+            desc: "Designed and deployed a responsive portfolio to showcase projects, certifications, and technical skills. Managed source code using Git and GitHub, demonstrating version control and project documentation practice. Deployed on Vercel for production-grade hosting.",
+            tags: ["HTML5", "CSS3", "JavaScript", "Git", "GitHub", "Vercel"],
+            img: "projects/skillbridge/thumbnail.png",
+            live: "https://portfolio-eight-sepia-17.vercel.app/",
+            github: "https://github.com/dsv2007"
+        }
+    };
+    </script>
 </body>
 </html>
